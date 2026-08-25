@@ -295,3 +295,15 @@ docker compose up -d --build
 - **前端 5173 打不开**：端口被占时 Vite 自动切 5174（后端 CORS 已包含两个端口）
 - **数据库连不上**：Docker Desktop 未启动或容器停了——启动 Docker Desktop 后 `docker start weather-pg weather-neo4j`
 - **Windows Git Bash 下 curl 测接口中文报错**：中文 JSON 写入 UTF-8 文件再 `-d @file`（终端直接传会编码错乱）
+
+## 版权声明
+
+**Copyright © 2026 zjm-cityboy. All rights reserved.**
+
+本项目代码与文档以 **[AGPL-3.0](LICENSE)** 协议发布：
+
+- ✅ 允许：学习研究、个人使用、修改——**但衍生作品必须以相同协议开源并保留本声明**
+- ❌ 禁止：将本项目代码用于闭源产品或商业服务而不开源衍生代码（AGPL 第 13 条：网络服务同样受约束）
+- 引用或二次开发时，请保留原作者署名与本协议声明
+
+**第三方语料说明**：本项目构建时使用的气象教材语料（Stull, *Practical Meteorology*）遵循其自身的 **CC BY-NC-SA 4.0** 协议（非商业、署名、相同方式共享）；语料文件**不在本仓库中**，复现项目请自行获取并遵守其授权条款。
