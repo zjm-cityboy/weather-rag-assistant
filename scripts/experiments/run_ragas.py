@@ -110,8 +110,11 @@ def run_ragas(records: list[dict]) -> dict:
     )
     print(f"[2] 评估完成，耗时 {(time.time()-t0)/60:.1f} 分钟")
     # EvaluationResult → DataFrame 后按列取均值（ragas 0.4 返回类型不再支持 .items()）
-    return {k: round(v, 4) for k, v in
-            result.to_pandas().mean(numeric_only=True).items()}
+    df = result.to_pandas()
+    means = {k: round(v, 4) for k, v in df.mean(numeric_only=True).items()}
+    # per-sample 分数（指标质量审查：某列全为常数 = 该指标失效的信号）
+    per_sample = df.round(4).to_dict(orient="records")
+    return means, per_sample
 
 
 def main() -> None:
@@ -120,13 +123,17 @@ def main() -> None:
     print(f"[0] 评测集 {len(items)} 条（{EVAL_SET.name}）")
 
     records = generate_answers(items)
-    scores = run_ragas(records)
+    scores, per_sample = run_ragas(records)
 
     print("\n===== RAGAS 四指标（20 题均值）=====")
     for name, value in scores.items():
         print(f"  {name:<28} {value}")
+    # 指标健康度：每列唯一值数（=1 说明该指标对所有样本返回同一分值，疑似失效）
+    health = {c: len({r.get(c) for r in per_sample}) for c in scores}
+    print("指标区分度（每指标的不同分值数，=1 为疑似失效）：", health)
     RESULTS_OUT.write_text(json.dumps(
-        {"dataset": EVAL_SET.name, "n": len(records), "scores": scores},
+        {"dataset": EVAL_SET.name, "n": len(records), "scores": scores,
+         "per_sample": per_sample},
         ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"结果已存 {RESULTS_OUT}")
 

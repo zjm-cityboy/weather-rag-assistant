@@ -2,9 +2,331 @@
   "dataset": "weather_qa_eval.jsonl",
   "n": 20,
   "scores": {
-    "faithfulness": 0.8935,
-    "answer_relevancy": 0.6618,
-    "llm_context_precision_with_reference": 0.4036,
-    "context_recall": 0.2833
-  }
+    "faithfulness": 0.9181,
+    "answer_relevancy": 0.6539,
+    "llm_context_precision_with_reference": 0.4469,
+    "context_recall": 0.3083
+  },
+  "per_sample": [
+    {
+      "user_input": "台风预警信号分为哪几个级别？",
+      "retrieved_contexts": [
+        "台风预警信号科普卡* 分级1. 蓝色:24 小时内可能受热带气旋影响,平均风力 6 级以上或阵风 8 级以上。防御:关好门窗,加固围板。\n2. 黄色:24 小时内可能受热带气旋影响,平均风力 8 级以上或阵风 10 级以上。防御:停止露天集体活动,高空作业停止。\n3. 橙色:12 小时内可能受热带气旋影响,平均风力 10 级以上或阵风 12 级以上。防御:进入防风状态,停止室内外大型集会。\n4. 红色:6 小时内可能受热带气旋影响,平均风力 12 级以上或阵风 14 级以上。防御:进入紧急防风状态,停业停课",
+        "asks for \"《气象灾害预警信号发布与传播办法》(中国气象局令第 16 号,2007 年)\".* *Strict Adherence:* I must follow the 2007 version. In the 2007 version, the Thunderstorm Warning Signal consists of Yellow and Red levels. (Note: Some regions later added Blue, but the national standard in 2007 was Yellow/Red).* *Wait, actually:* Let me check the specific attachment content for 2007 Order No. 16.* *Search Query Simulation:* \"气象灾害预警信号发布与传播办法 2007 雷电\".* *Result:* In the 2007 version, the Thunderstorm Warning Signal (雷电预警信号) has",
+        "。当预报12级以上台风正面登陆或严重影响我省时,省委、省政府部署防台抢险救灾工作,省防指具体组织实施。\n2.2 市、县(市、区)政府防汛防旱指挥部按照属地管理原则,各市、县(市、区)人民政府防汛防旱指挥部负责当地的防台抢险救灾工作,必要时,由当地党委、政府部署防台抢险救灾工作,防指具体组织实施。\n2.3 其他防汛防旱指挥机构乡(镇)政府(街道办事处)和城镇社区、行政村等基层组织,以及企事业单位根据需要设立防汛防旱办事机构,明确人员和职责,按照县级政府防汛防旱指挥机构指令和预案,做好防台抢险救灾工作。\n3 影响台风分级按照台风影响范围和程度,分为四级:特别重大(I级)、重大(II级)、较大(III级)、一般(IV级)。\n3.1 特别重大(I级)省气象台预报强热带风暴、台风将登陆并严重影响我省。\n3.2 重大(II级)省气象台预报热带风暴在我省登陆,或强热带风暴、台风在福建(厦门以北)、上海等附近省(市)登陆,严重影响我省(三个设区市以上)。\n3.3 较大(III级)省气象台预报热带风暴、强热带风暴、台风在厦门以南登陆或紧擦浙江沿海北上,影响我省范围较小(二个设区市以下)或预计影响程度不重",
+        "some local variations might exist, the national standard attachment specifies Yellow, Orange, Red).* Wait, let me double-check the 2007 Order No. 16 Attachment.* According to《气象灾害预警信号发布与传播办法》附件:* 沙尘暴预警信号分为三级:黄色、橙色、红色",
+        "。\n3.4 一般(IV级)省气象台预报热带风暴、强热带风暴、台风在东经125度以东,或北纬24以南转向,对我省影响较小。\n4 预防和预警机制4.1 台风及次生灾害监测各级气象、海洋、水利、国土资源等部门负责台风、暴雨、洪水、风暴潮及山地灾害监测、预报、预警系统建设,及时向有关防汛防旱指挥机构提供台风、降雨、洪水、风暴潮的实时信息和预测预报成果及地质灾害监测资料。\n4.2 水利工程巡查水库、三级以上堤防(海塘)和其他险工险段等防洪工程管理单位应当建立日常巡查制度与安全监测监管制度。\n4.3 山洪灾害预警员落实易发山洪和泥石流、山体滑坡等灾害地区的乡(镇)人民政府(街道办事处)和城镇社区、行政村,以及企事业单位应当确定预警员,落实预警职责。\n4.4 防台检查4.4.1县级以上人民政府防汛防旱指挥机构应当在台汛前组织有关部门和单位开展防台检查,发现防台安全问题的,责成有关单位限期处理和整改。\n4.4.2 建设、电力、交通、通信等部门应当加强市政、电力、交通、通讯等设施的防台检查,发现问题,责成有关部门和单位及时处理"
+      ],
+      "response": "根据提供的参考资料，台风预警信号共分为四个级别，由低到高依次为：\n\n1.  **蓝色预警**：表示24小时内可能受热带气旋影响，平均风力6级以上或阵风8级以上。防御措施包括关好门窗、加固围板。\n2.  **黄色预警**：表示24小时内可能受热带气旋影响，平均风力8级以上或阵风10级以上。防御措施包括停止露天集体活动、停止高空作业。\n3.  **橙色预警**：表示12小时内可能受热带气旋影响，平均风力10级以上或阵风12级以上。防御措施包括进入防风状态、停止室内外大型集会。\n4.  **红色预警**：表示6小时内可能受热带气旋影响，平均风力12级以上或阵风14级以上。防御措施包括进入紧急防风状态、停业停课。",
+      "reference": "台风预警信号分四级：蓝色、黄色、橙色、红色，严重程度由低到高。红色表示6小时内可能或者已经受台风影响，平均风力12级以上。\nEnglish key points: Typhoon warning signals in China have four levels: blue, yellow, orange and red; red means winds of force 12 or above within 6 hours.",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.7642,
+      "llm_context_precision_with_reference": 1.0,
+      "context_recall": 0.6667
+    },
+    {
+      "user_input": "暴雨红色预警的发布标准是什么？",
+      "retrieved_contexts": [
+        "暴雨预警信号科普卡* 分级1. 蓝色:12 小时内降雨量将达 50 毫米以上,或者已达 50 毫米以上且降雨可能持续。防御:学校、幼儿园采取适当措施,保证学生安全;驾驶人员注意道路积水和交通阻塞;检查城市、农田、鱼塘排水系统,做好排涝准备。\n2. 黄色:6 小时内降雨量将达 50 毫米以上,或者已达 50 毫米以上且降雨可能持续。防御:交通管理部门根据路况在强降雨路段采取交通管制措施;切断低洼地带有危险的室外电源,暂停户外作业;转移危险地带与危房中的人员到安全场所避雨。\n3. 橙色:3 小时内降雨量将达 50 毫米以上,或者已达 50 毫米以上且降雨可能持续。防御:切断有危险的室外电源,暂停户外作业;处于危险地带的单位应当停课、停业;做好城市、农田的排涝,注意防范可能引发的山洪、滑坡、泥石流等灾害。\n4. 红色:3 小时内降雨量将达 100 毫米以上,或者已达 100 毫米以上且降雨可能持续。防御:停止集会、停课、停业(除特殊行业外);做好山洪、滑坡、泥石流等灾害的防御和抢险工作",
+        "the Thunderstorm Warning Signal (雷电预警信号) has Yellow and Red levels.* Yellow: 6 hours within 10 km radius, thunderstorm activity. (Wait, specific definition: 6 hours within 10km? Or 2 hours? Let's recall.)* *Standard:** Yellow: 6 hours within 10km radius, thunderstorm activity likely. (Actually, the standard is: 6 hours within 10km, or 2 hours within 10km? Let's be precise.)* *Correction:* According to the 2007 Attachment:* Yellow: 6 hours within 10km, thunderstorm activity. (Wait, usually it's",
+        "asks for \"《气象灾害预警信号发布与传播办法》(中国气象局令第 16 号,2007 年)\".* *Strict Adherence:* I must follow the 2007 version. In the 2007 version, the Thunderstorm Warning Signal consists of Yellow and Red levels. (Note: Some regions later added Blue, but the national standard in 2007 was Yellow/Red).* *Wait, actually:* Let me check the specific attachment content for 2007 Order No. 16.* *Search Query Simulation:* \"气象灾害预警信号发布与传播办法 2007 雷电\".* *Result:* In the 2007 version, the Thunderstorm Warning Signal (雷电预警信号) has",
+        "暴雪预警信号).* Requirements:1. Strictly follow the classification levels (Blue/Yellow/Orange/Red subset). Include Color, Icon Meaning, Issuance Standard (specific thresholds), Defense Guidelines (itemized).2. Language for general public, accurate use of original text values, no fabrication.3. Add a \"Science Popularization Points\" (科普要点) section at the end: Cause and daily prevention.4. Format: Plain text + simple numbering, NO Markdown tables.5. Length: Under 600 Chinese characters.2. Retrieve",
+        "。防御:停止集会、停课、停业(除特殊行业外);做好山洪、滑坡、泥石流等灾害的防御和抢险工作。\n* 科普要点- 成因:暴雨常由强对流天气、锋面系统、台风外围环流或低涡切变线等系统造成,充沛的水汽输送与强烈上升运动是必要条件;城市热岛效应会加剧局地短时强降雨。\n- 灾害链:暴雨可引发城市内涝、山洪、滑坡、泥石流等次生灾害,山区与低洼地带风险最高。\n- 日常预防:关注气象部门预警信息,暴雨红色预警时避免外出;不在低洼地带、地下空间逗留;驾车绕开积水路段,不强行涉水。\n- 数据口径:气象上\"暴雨\"指 24 小时降水量达 50~99.9 毫米,100~249.9 毫米为\"大暴雨\",250 毫米以上为\"特大暴雨\"。"
+      ],
+      "response": "根据参考资料，暴雨红色预警信号的发布标准为：3 小时内降雨量将达 100 毫米以上，或者已达 100 毫米以上且降雨可能持续。\n\n此外，气象学上对“暴雨”的界定为 24 小时降水量达 50~99.9 毫米，100~249.9 毫米为大暴雨，250 毫米以上为特大暴雨。当发布暴雨红色预警时，防御措施包括停止集会、停课、停业（除特殊行业外），并做好山洪、滑坡、泥石流等灾害的防御和抢险工作。",
+      "reference": "暴雨红色预警标准为3小时内降雨量将达100毫米以上，或者已达100毫米以上且降雨可能持续。\nEnglish key points: A red rainstorm warning is issued when rainfall reaches 100 mm within 3 hours (or has reached 100 mm and will continue).",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.7125,
+      "llm_context_precision_with_reference": 1.0,
+      "context_recall": 0.5
+    },
+    {
+      "user_input": "雷电天气应该采取哪些防护措施？",
+      "retrieved_contexts": [
+        "。\n* 黄色:6 小时内可能发生雷电活动,可能会造成雷电灾害事故。\n* 红色:2 小时内发生雷电活动的可能性很大,或者已经受雷电活动影响,且可能持续,出现雷电灾害事故的可能性比较大。\n* *Defense Guidelines:** Yellow: 1. Close windows. 2. Stop outdoor activities. 3. Avoid tall objects.* Red: 1. Stay indoors. 2. Stop outdoor activities. 3. Avoid tall objects. 4. Turn off electrical appliances.* *Wait, I need to be very precise about the \"Defense Guidelines\" (防御指南).** *Yellow Defense:* 1. 政府及相关部门按照职责做好防雷电准备工作;2. 停止露天集体活动,立即疏散人员;3. 切断危险电源",
+        "。\n* *Red Defense:* 1. 政府及相关部门按照职责做好防雷电应急工作;2. 停止露天集体活动,立即疏散人员;3. 切断危险电源;4. 人员应当留在室内,关好门窗。\n* *Wait, let me recall the exact text from the 2007 Attachment.** *Yellow:*1. 政府及相关部门按照职责做好防雷电准备工作;2. 停止露天集体活动,立即疏散人员;3. 切断危险电源。\n* *Red:*1. 政府及相关部门按照职责做好防雷电应急工作;",
+        "。\n防御:1. 关紧门窗;2. 加固易被风吹动的搭建物;3. 检查电路煤气。\n\n2. 台风黄色预警颜色:黄色",
+        "。\n* Red: 1. 采取极端防护措施;2. 人员尽量留在室内;3. 农业设施加固。\n* *Actually, the 2007 document's \"Cold Wave\" section:** Blue: 48h, drop 8°C, min 4°C. Defense: 1. 政府及相关部门按照职责做好防寒潮准备工作;2. 老弱病幼人群注意保暖;3. 农业做好防寒防冻。\n* Yellow: 24h, drop 10°C, min 4°C. Defense: 1. 做好防寒准备;2. 减少户外活动;3. 农业设施加固。\n* Orange: 24h, drop 12°C, min 2°C. Defense: 1. 停止露天活动;2. 交通部门注意防滑;3. 农业设施加固。\n* Red: 24h, drop 16°C, min 0°C. Defense: 1. 采取极端防护措施;2. 人员尽量留在室内;3. 农业设施加固",
+        "。\n* Red Defense: 1. 有关部门和单位按照职责采取防暑降温应急措施;2. 停止户外露天作业(除特殊行业外);3. 对老、弱、病、幼人群采取保护措施;4. 有关部门和单位要特别注意防火"
+      ],
+      "response": "根据提供的参考资料，雷电天气的防护措施依据预警信号的颜色等级有所不同：\n\n**1. 雷电黄色预警时的防御指南：**\n*   政府及相关部门应按照职责做好防雷电准备工作。\n*   停止露天集体活动，并立即疏散人员。\n*   切断危险电源。\n\n**2. 雷电红色预警时的防御指南：**\n*   政府及相关部门应按照职责做好防雷电应急工作。\n*   停止露天集体活动，并立即疏散人员。\n*   切断危险电源。\n*   人员应当留在室内，并关好门窗。\n\n**3. 通用安全建议（基于资料中的简要说明）：**\n*   关闭门窗。\n*   停止户外活动。\n*   避免靠近高大物体。\n*   在红色预警下，建议关闭电器设备。\n\n请注意，以上措施主要针对预警发布后的应对。如果是实时具体的天气状况（如现在是否正在打雷），资料中未涉及实时监测数据，建议关注当地气象部门发布的最新实时信息。",
+      "reference": "雷电天气应关好门窗、留在室内并远离门窗，切断危险电源，停止露天集体活动，户外人员不要在大树、电线杆下躲避。\nEnglish key points: During thunderstorms: close windows, stay indoors away from them, cut off dangerous power, stop outdoor group activities, and never shelter under tall trees or poles.",
+      "faithfulness": 0.9444,
+      "answer_relevancy": 0.657,
+      "llm_context_precision_with_reference": 1.0,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "高温橙色预警是什么意思？",
+      "retrieved_contexts": [
+        "。\n3. 橙色预警:24 小时内最低气温下降 12°C以上,最低气温≤2°C。\n4. 红色预警:24 小时内最低气温下降 16°C以上",
+        "。\n* Red: 24 小时内最高气温将升至 40°C以上。\n* *Wait, actually, many sources cite Yellow as \"连续两天\" in later revisions (2010). But for 2007 Order 16, it is often cited as \"连续三天\". However, to be safe and accurate to the most common public understanding which aligns with the 2007 framework before 2010 revision:** Actually, checking the official text of Order 16 Attachment:* 高温黄色预警:连续三天日最高气温将在 35°C以上。\n* 高温橙色预警:24 小时内最高气温将升至 37°C以上。\n* 高温红色预警:24 小时内最高气温将升至 40°C以上",
+        "NO Markdown tables.5. Length: Under 600 Chinese characters.2. Retrieve Knowledge (Internal Knowledge):* Source: 《气象灾害预警信号及防御指南》 (2007).* High Temperature Warning Levels: Yellow, Orange, Red. (Note: Blue is not typically used for High Temperature in the 2007 version, though some local variations might exist, the national standard attachment usually lists Yellow, Orange, Red).* *Correction/Verification:* In the 2007 version (Order No. 16), High Temperature warnings are indeed Yellow, Orange, and",
+        "warnings are indeed Yellow, Orange, and Red.* Yellow: 2 days consecutive, max temp >= 35°C.* Orange: 2 days consecutive, max temp >= 37°C.* Red: 2 days consecutive, max temp >= 40°C.* *Wait, check specific wording:** Yellow: 连续两天日最高气温将在 35°C以上",
+        "。\n* Red: 24 小时内最高气温将升至 40°C以上。\n* *Self-Correction:* There was a revision in 2010 (Order No. 21) and later. The prompt specifically cites Order No. 16 (2007). I must stick to the 2007 standard if possible, but often the \"Yellow\" standard is the most debated.* Let's check the 2007 Attachment text specifically.* 高温黄色预警信号:连续三天日最高气温将在 35°C以上。\n* 高温橙色预警信号:24 小时内最高气温将升至 37°C以上。\n* 高温红色预警信号:24 小时内最高气温将升至 40°C以上"
+      ],
+      "response": "根据提供的参考资料，高温橙色预警的含义如下：\n\n在2007年发布的《气象灾害预警信号及防御指南》（第16号令）框架下，高温橙色预警信号的标准是：24小时内最高气温将升至37°C以上。\n\n需要注意的是，参考资料中也提及了部分来源或后续修订（如2010年后的版本）可能将标准调整为“连续两天日最高气温在37°C以上”，但依据资料中明确引用的2007年官方附件原文，核心判定标准为\"24小时内最高气温将升至37°C以上”。\n\n参考资料中未涉及高温橙色预警的具体防御措施。",
+      "reference": "高温橙色预警表示24小时内最高气温将升至37℃以上。\nEnglish key points: An orange high-temperature warning means the maximum temperature will rise above 37C within 24 hours.",
+      "faithfulness": 0.8,
+      "answer_relevancy": 0.6426,
+      "llm_context_precision_with_reference": 0.45,
+      "context_recall": 0.5
+    },
+    {
+      "user_input": "寒潮预警信号是怎样分级的？",
+      "retrieved_contexts": [
+        "寒潮预警信号科普卡** 蓝色:48 小时内降温 8°C以上,最低气温 4°C以下。\n* 黄色:24 小时内降温 10°C以上,最低气温 4°C以下。\n* 橙色:24 小时内降温 12°C以上,最低气温 2°C以下。\n* 红色:24 小时内降温 16°C以上,最低气温 0°C以下",
+        "Brief cause and daily prevention tips.5. Format: Plain text + simple numbering, NO Markdown tables.6. Length: Under 600 Chinese characters.2. Retrieve Knowledge (Internal Knowledge):* Query: What are the frost warning signal levels in China's 2007 regulation?* Fact: According to the \"Measures for the Issuance and Dissemination of Meteorological Disaster Warning Signals\" (Order No. 16), the Frost Warning Signal has two levels: Blue and Yellow. (Unlike some other disasters like Typhoon or",
+        "(Unlike some other disasters like Typhoon or Rainstorm which have 4 levels).* Blue Level Standard: 48 hours, ground minimum temperature below 0°C.* Yellow Level Standard: 24 hours, ground minimum temperature below 0°C.* Wait, let me double-check the exact wording.* *Correction/Verification:* In the 2007 Order No. 16 Attachment:* 霜冻预警信号 (Frost Warning Signal)* Blue (蓝色): 48 小时内地面最低温度下降到 0°C以下,对农业已经产生影响或者可能产生影响",
+        "official text memory.* Official Text (Order 16):* 干旱预警信号分三级,分别以黄色、橙色、红色表示",
+        "。\n* Red: 1. 采取极端防护措施;2. 人员尽量留在室内;3. 农业设施加固。\n* *Actually, the 2007 document's \"Cold Wave\" section:** Blue: 48h, drop 8°C, min 4°C. Defense: 1. 政府及相关部门按照职责做好防寒潮准备工作;2. 老弱病幼人群注意保暖;3. 农业做好防寒防冻。\n* Yellow: 24h, drop 10°C, min 4°C. Defense: 1. 做好防寒准备;2. 减少户外活动;3. 农业设施加固。\n* Orange: 24h, drop 12°C, min 2°C. Defense: 1. 停止露天活动;2. 交通部门注意防滑;3. 农业设施加固。\n* Red: 24h, drop 16°C, min 0°C. Defense: 1. 采取极端防护措施;2. 人员尽量留在室内;3. 农业设施加固"
+      ],
+      "response": "根据参考资料，寒潮预警信号共分为四个等级，由低到高依次为蓝色、黄色、橙色和红色，具体标准如下：\n\n1. **蓝色预警**：预计 48 小时内最低气温将下降 8°C 以上，且最低气温降至 4°C 以下。\n2. **黄色预警**：预计 24 小时内最低气温将下降 10°C 以上，且最低气温降至 4°C 以下。\n3. **橙色预警**：预计 24 小时内最低气温将下降 12°C 以上，且最低气温降至 2°C 以下。\n4. **红色预警**：预计 24 小时内最低气温将下降 16°C 以上，且最低气温降至 0°C 以下。",
+      "reference": "寒潮预警信号分四级：蓝色、黄色、橙色、红色，分别对应不同强度的降温幅度（如蓝色为48小时内降温8℃以上且最低气温降至4℃以下）。\nEnglish key points: Cold wave warnings have four levels (blue/yellow/orange/red) based on the magnitude of temperature drop; blue = drop of 8C+ within 48 hours with minimum below 4C.",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.7599,
+      "llm_context_precision_with_reference": 0.7,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "大雾预警信号分几级？",
+      "retrieved_contexts": [
+        "大雾预警信号分为四级:蓝色、黄色、橙色、红色。\n* 蓝色:12 小时内可能出现能见度小于 1000 米的雾,或者已经出现能见度小于 1000 米、大于等于 500 米的雾并将持续。\n* 黄色:6 小时内可能出现能见度小于 500 米的雾,或者已经出现能见度小于 500 米、大于等于 200 米的雾并将持续。\n* 橙色:2 小时内可能出现能见度小于 200 米的雾,或者已经出现能见度小于 200 米、大于等于 50 米的雾并将持续。\n* 红色:2 小时内可能出现能见度小于 50 米的雾,或者已经出现能见度小于 50 米的雾并将持续。\n* Defense Guidelines (General for Fog):* 1. 驾驶人员注意雾的变化,控制车速,保持车距,开启雾灯。\n* 2. 机场、高速公路、轮渡码头等单位采取相应措施保障交通安全。\n* 3. 做好防风、防雾工作",
+        "the Thunderstorm Warning Signal (雷电预警信号) has Yellow and Red levels.* Yellow: 6 hours within 10 km radius, thunderstorm activity. (Wait, specific definition: 6 hours within 10km? Or 2 hours? Let's recall.)* *Standard:** Yellow: 6 hours within 10km radius, thunderstorm activity likely. (Actually, the standard is: 6 hours within 10km, or 2 hours within 10km? Let's be precise.)* *Correction:* According to the 2007 Attachment:* Yellow: 6 hours within 10km, thunderstorm activity. (Wait, usually it's",
+        "asks for \"《气象灾害预警信号发布与传播办法》(中国气象局令第 16 号,2007 年)\".* *Strict Adherence:* I must follow the 2007 version. In the 2007 version, the Thunderstorm Warning Signal consists of Yellow and Red levels. (Note: Some regions later added Blue, but the national standard in 2007 was Yellow/Red).* *Wait, actually:* Let me check the specific attachment content for 2007 Order No. 16.* *Search Query Simulation:* \"气象灾害预警信号发布与传播办法 2007 雷电\".* *Result:* In the 2007 version, the Thunderstorm Warning Signal (雷电预警信号) has",
+        "Brief cause and daily prevention tips.5. Format: Plain text + simple numbering, NO Markdown tables.6. Length: Under 600 Chinese characters.2. Retrieve Knowledge (Internal Knowledge):* Query: What are the frost warning signal levels in China's 2007 regulation?* Fact: According to the \"Measures for the Issuance and Dissemination of Meteorological Disaster Warning Signals\" (Order No. 16), the Frost Warning Signal has two levels: Blue and Yellow. (Unlike some other disasters like Typhoon or",
+        "some local variations might exist, the national standard attachment specifies Yellow, Orange, Red).* Wait, let me double-check the 2007 Order No. 16 Attachment.* According to《气象灾害预警信号发布与传播办法》附件:* 沙尘暴预警信号分为三级:黄色、橙色、红色"
+      ],
+      "response": "根据参考资料，大雾预警信号共分为四级，分别是蓝色、黄色、橙色和红色。\n\n各级别的具体含义如下：\n*   **蓝色预警**：表示12小时内可能出现能见度小于1000米的雾，或者已经出现能见度小于1000米、大于等于500米的雾并将持续。\n*   **黄色预警**：表示6小时内可能出现能见度小于500米的雾，或者已经出现能见度小于500米、大于等于200米的雾并将持续。\n*   **橙色预警**：表示2小时内可能出现能见度小于200米的雾，或者已经出现能见度小于200米、大于等于50米的雾并将持续。\n*   **红色预警**：表示2小时内可能出现能见度小于50米的雾，或者已经出现能见度小于50米的雾并将持续。\n\n**防御指南：**\n1. 驾驶人员需注意雾的变化，控制车速，保持车距，并开启雾灯。\n2. 机场、高速公路、轮渡码头等单位应采取相应措施保障交通安全。\n3. 做好防风、防雾工作。",
+      "reference": "大雾预警信号分三级：黄色、橙色、红色。黄色为12小时内可能出现能见度小于500米的雾。\nEnglish key points: Fog warnings have three levels: yellow, orange and red; yellow = visibility below 500 m within 12 hours.",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.7258,
+      "llm_context_precision_with_reference": 0.2,
+      "context_recall": 0.0
+    },
+    {
+      "user_input": "大风天气应该怎么防御？",
+      "retrieved_contexts": [
+        "。\n防御:1. 关紧门窗;2. 加固易被风吹动的搭建物;3. 检查电路煤气。\n\n2. 台风黄色预警颜色:黄色",
+        "《国家气象灾害应急预案》台风节选2020-07-29 15:22:05来源:4.4.1台风、大风气象部门加强监测预报,及时发布台风、大风预警信号及相关防御指引,适时加大预报时段密度。\n海洋部门密切关注管辖海域风暴潮和海浪发生发展动态,及时发布预警信息。\n防汛部门根据风灾风险评估结果和预报的风力情况,与地方人民政府共同做好危险地带和防风能力不足的危房内居民的转移,安排其到安全避风场所避风。\n民政部门负责受灾群众的紧急转移安置并提供基本生活救助。\n住房城乡建设部门采取措施,巡查、加固城市公共服务设施,督促有关单位加固门窗、围板、棚架、临时建筑物等,必要时可强行拆除存在安全隐患的露天广告牌等设施。\n交通运输、农业部门督促指导港口、码头加固有关设施,督促所有船舶到安全场所避风,防止船只走锚造成碰撞和搁浅;督促运营单位暂停运营、妥善安置滞留旅客。\n教育部门根据防御指引、提示,通知幼儿园、托儿所、中小学和中等职业学校做好停课准备;避免在突发大风时段上学放学。\n住房城乡建设、交通运输等部门通知高空、水上等户外作业单位做好防风准备,必要时采取停止作业措施,安排人员到安全避风场所避风",
+        "。\n* Yellow: 12 小时内可能受大风影响,平均风力达 8 级以上,或阵风 10 级以上。\n* Orange: 6 小时内可能受大风影响,平均风力达 10 级以上,或阵风 12 级以上。\n* Red: 6 小时内可能受大风影响,平均风力达 12 级以上,或阵风 14 级以上。\n* Defense Guidelines: Need to condense.* Blue/Yellow: 关好门窗,加固围板,妥善安置易受大风影响的室外物品。\n* Orange/Red: 停止露天集体活动和高空等户外危险作业,人员尽量待在室内,加固易被风吹动的搭建物。\n* 科普要点 Cause (pressure difference), Prevention (avoid high places, secure objects).4. Refining and Counting Characters:* *Draft 1:*大风预警信号科普卡1. 蓝色预警图标:风旗飘扬标准:12 小时内可能受大风影响,平均风力达 6 级以上,或阵风 8 级以上。\n指南:关好门窗,加固围板,妥善安置室外物品",
+        "。\n* 5. 做好防风沙准备,加固门窗。\n* *Correction:* I need to check the specific defense guidelines for each level in the attachment. Usually, the attachment provides a general defense guideline for the signal type, but sometimes specific levels have slight variations.* Actually, looking at the standard attachment for Sandstorm (沙尘暴):* Yellow: 12 小时内可能出现沙尘暴天气(能见度小于 1000 米),或者已经出现沙尘暴天气并可能持续。\n* Orange: 6 小时内可能出现沙尘暴天气(能见度小于 500 米),或者已经出现沙尘暴天气并可能持续。\n* Red: 6 小时内可能出现特强沙尘暴天气(能见度小于 50 米),或者已经出现特强沙尘暴天气并可能持续",
+        "。\n* Defense Guidelines (General):1. 政府及相关部门按照职责做好防沙尘暴应急工作。\n2. 停止露天集体活动和高空等户外危险作业。\n3. 相关水域水上作业和过往船舶采取积极的应对措施,如回港避风或者绕道航行等。\n4. 行人、车辆注意防尘、防风、防沙,必要时佩戴口罩、护目镜。\n5. 做好防风沙准备,加固门窗"
+      ],
+      "response": "根据参考资料，大风天气的防御措施需根据预警信号的颜色等级采取相应行动：\n\n**1. 蓝色、黄色预警防御措施**\n当预计 12 小时内可能受大风影响（平均风力达 8 级以上，或阵风 10 级以上）时，应：\n*   关好门窗。\n*   加固围板。\n*   妥善安置易受大风影响的室外物品。\n*   做好防风沙准备，加固门窗（针对沙尘暴伴随大风的情况）。\n\n**2. 橙色、红色预警防御措施**\n当预计 6 小时内可能受大风影响（平均风力达 10 级或 12 级以上，或阵风 12 级或 14 级以上）时，防御等级升级：\n*   停止露天集体活动和高空等户外危险作业。\n*   人员尽量待在室内。\n*   加固易被风吹动的搭建物。\n*   政府及相关部门需按照职责做好防大风应急工作。\n*   相关水域的水上作业和过往船舶应采取积极应对措施，如回港避风或绕道航行。\n*   行人和车辆注意防尘、防风、防沙，必要时佩戴口罩、护目镜。\n\n**3. 其他部门与特定场景的防御指引**\n*   **家庭安全**：关紧门窗，检查电路和煤气，防止次生灾害。\n*   **城市设施**：督促有关单位加固门窗、围板、棚架、临时建筑物等，必要时拆除存在安全隐患的露天广告牌。\n*   **交通运输**：港口、码头需加固设施，所有船舶应到安全场所避风，防止走锚碰撞；运营单位需暂停运营并妥善安置滞留旅客。\n*   **高空与户外作业**：通知高空、水上等户外作业单位做好防风准备，必要时停止作业，安排人员到安全避风场所。\n*   **人员转移**：防汛部门需根据风险评估，将危险地带和防风能力不足危房内的居民转移至安全避风场所。\n*   **教育安排**：幼儿园、中小学及中等职业学校应做好停课准备，避免在突发大风时段上学放学。\n\n**4. 科普要点**\n*   **成因**：大风主要由气压差引起。\n*   **核心原则**：避免前往高处，务必固定好室外物品。",
+      "reference": "大风天气应关紧门窗，加固围板、棚架、广告牌等易被风吹动的搭建物，停止露天集体活动，海上作业船舶回港避风。\nEnglish key points: In gales: close doors and windows, secure hoardings/scaffolding/billboards, stop outdoor activities, and fishing vessels should return to port.",
+      "faithfulness": 0.7941,
+      "answer_relevancy": 0.7146,
+      "llm_context_precision_with_reference": 0.5889,
+      "context_recall": 0.5
+    },
+    {
+      "user_input": "冰雹多发生在什么季节？",
+      "retrieved_contexts": [
+        "Also, on those rare occasions when thunder­ storms can be triggered in late Fall or early Spring, boundary-layer temperatures can be cold enough to allow snow from thunderstorms to reach the ground as large snow clusters (snow balls) without totally melting, accompanied by lightning and thun­\nFigure 7.21\nThunderstorms can have cold-cloud tops and warm-cloud bases, allowing efficient growth of ice precipitation that can melt into large raindrops on the way down.\n–40°C 0°C x",
+        "In summer, all of these ice particles (except for some of the hail) melt while falling, and reach the ground as rain. The greatest precipitation rate is close to the updraft, with precipitation rates dimin­ ishing farther away. The very smallest ice particles have such a slow fall velocity that they have a long residence time in the top of the troposphere, and are blown downwind to become the anvil cloud.",
+        "If the collected water does not freeze instantly upon contacting the ice particle, but instead flows around it before freezing, then hail can form.\nGraupel contains a lot of air trapped between the frozen droplets on the graupel, and thus is often softer and less dense than hail. See the Thunder­ storm chapters for more information about hail.\n7.6.3. Precipitation Formation 7.6.3.1. Warm Clouds",
+        "CHAPTER 16 • TROPICAL CYCLONES 16.7. CLIMATOLOGY 16.7.1. Seasonality \nTropical cyclones are most frequent in late Sum­ mer and Fall of their respective hemisphere. This is because the sun has been at its highest in the sky, causing the top layers of the tropical ocean to accu­ mulate the most heat. Fig. 16.40 shows the frequency of Atlantic Hurricanes vs. time. Table 16-6 shows periods of frequent tropical cyclones in all the ocean basins.\n16.7.2. Locations of Strongest Cyclones",
+        "• Monsoons: Quasi-stationary, continentalscale highs form over cool oceans in summer and cold continents in winter (see the General Circula­ tion chapter). They are seasonal (i.e., last for several months), and form due to the temperature contrast between land and ocean."
+      ],
+      "response": "根据提供的参考资料，**未明确说明**冰雹具体多发生在哪个季节，但提供了以下相关背景信息：\n\n1.  **夏季降水特征**：资料指出，在**夏季**，雷暴中产生的冰粒子（除部分冰雹外）在下落过程中会融化，最终以降雨形式到达地面。这暗示夏季雷暴中虽然存在冰雹形成的条件，但大部分冰粒子会融化。\n2.  **特殊天气现象**：资料提到，在**晚秋或早春**的罕见情况下，如果雷暴触发的边界层温度足够低，冰雹或雪花团可能不会完全融化而直接到达地面。\n3.  **热带气旋季节**：资料提到热带气旋（台风/飓风）多发于夏末和秋季，但这主要描述的是气旋的频率，未直接关联冰雹的季节性分布。\n\n综上所述，参考资料中**未涉及**冰雹发生频率最高的具体季节，仅提及夏季雷暴中冰粒子易融化，以及晚秋或早春在特定低温条件下可能出现未融化的冰雹或雪团。",
+      "reference": "冰雹多发生在春夏之交和夏季对流活动旺盛的季节，由强对流天气中的强上升气流反复托举冰粒增大形成。\nEnglish key points: Hail mostly occurs in late spring and summer when strong convection is active; hailstones grow by repeated lifting in strong updrafts.",
+      "faithfulness": 0.7692,
+      "answer_relevancy": 0.0,
+      "llm_context_precision_with_reference": 0.0,
+      "context_recall": 0.0
+    },
+    {
+      "user_input": "干旱预警信号有哪几级？",
+      "retrieved_contexts": [
+        "official text memory.* Official Text (Order 16):* 干旱预警信号分三级,分别以黄色、橙色、红色表示",
+        "text + simple numbering, NO Markdown tables.5. Length: Under 600 Chinese characters.2. Retrieve Knowledge (Internal Knowledge):* I need to recall or verify the specific standards for \"Drought\" warning signals according to the 2007 Order No. 16.* *Correction/Verification:* In the 2007 Order No. 16, the \"Drought\" warning signal actually has three levels: Yellow, Orange, Red. (Blue is not typically used for drought in the original 2007 standard, though some local adaptations might exist, I must",
+        "though some local adaptations might exist, I must stick to the national standard mentioned).* *Wait, let me double-check:* The 2007 standard (Order 16) defines warning signals for various disasters. For Drought (干旱):* Yellow (III级): 20 days of continuous drought in a county.* Orange (II级): 30 days of continuous drought.* Red (I级): 40 days of continuous drought.* *Wait, is it just days?* Actually, the standard often refers to \"meteorological drought index\" or specific rainfall deficits. Let's",
+        "。\n* 黄色:预计未来一周综合气象干旱指数达到轻旱等级以上,或者某一县(区)有 40% 以上农作物受旱。\n* Orange: 预计未来一周综合气象干旱指数达到中旱等级以上,或者某一县(区)有 60% 以上农作物受旱。\n* Red: 预计未来一周综合气象干旱指数达到重旱等级以上,或者某一县(区)有 80% 以上农作物受旱。\n* *Wait, there is a conflict in memory.* There was a revision in 2010 (Order 23) or later updates. The prompt specifically asks for Order No. 16 (2007).* In the 2007 Order No. 16 Attachment:* 干旱 (Drought):* Yellow: 预计未来一周综合气象干旱指数达到轻旱等级以上,或者某一县(区)有 40% 以上农作物受旱。\n* Orange: 预计未来一周综合气象干旱指数达到中旱等级以上,或者某一县(区)有 60% 以上农作物受旱",
+        "干旱预警信号).* Requirements:1. Strictly follow the grading system specified in the regulation (usually a subset of Blue/Yellow/Orange/Red). Include Color, Icon Meaning, Issuance Standards (specific thresholds), and Defense Guidelines (itemized).2. Language for general public, accurate use of original text values, no fabrication.3. Add a \"Science Popularization Points\" (科普要点) section at the end: Brief cause and daily prevention tips.4. Format: Plain text + simple numbering, NO Markdown tables.5."
+      ],
+      "response": "根据提供的参考资料，干旱预警信号共分为三级，分别以黄色、橙色和红色表示。\n\n具体各级别的含义及发布标准如下：\n\n1. **黄色预警（III级）**：预计未来一周综合气象干旱指数达到轻旱等级以上，或者某一县（区）有 40% 以上农作物受旱。\n2. **橙色预警（II级）**：预计未来一周综合气象干旱指数达到中旱等级以上，或者某一县（区）有 60% 以上农作物受旱。\n3. **红色预警（I级）**：预计未来一周综合气象干旱指数达到重旱等级以上，或者某一县（区）有 80% 以上农作物受旱。\n\n参考资料中未涉及具体的防御措施及科普要点内容。",
+      "reference": "干旱预警信号分两级：橙色和红色。橙色为预计未来一周综合气象干旱指数达到重旱。\nEnglish key points: Drought warnings have two levels: orange and red; orange = comprehensive meteorological drought index reaching severe drought in the coming week.",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.8063,
+      "llm_context_precision_with_reference": 0.0,
+      "context_recall": 0.0
+    },
+    {
+      "user_input": "台风形成的必要条件有哪些？",
+      "retrieved_contexts": [
+        "A striking observation in Fig. 16.7 is that no trop­ ical cyclones form at the equator. Also, none cross the equator. The next section explains why.\n16.3. EVOLUTION 16.3.1. Requirements for Cyclogenesis \nSeven conditions are necessary for tropical cyclones to form: a warm sea surface, non-zero\nCoriolis force, nonlocal conditional instability, high humidity in the mid troposphere, weak ambient wind shear, enhanced synoptic-scale vorticity, and a trigger.\n16.3.1.1. Warm Sea Surface",
+        "CHAPTER 14 • THUNDERSTORM FUNDAMENTALS  14.2. THUNDERSTORM FORMATION 14.2.1. Favorable Conditions \nFour environmental (pre-storm) conditions are needed to form the strong moist convection that is a severe thunderstorm:",
+        "Because tropical cyclones are born in the tradewind regions of the global circulation, they are ini­ tially blown westward. Many eventually reach the eastern shores of continents where the global circu­ lation turns them poleward. At the equator there is no Coriolis force; hence there is no rotation avail­ able to be concentrated into tropical cyclones. Thus, tropical cyclones are most likely to form between 10° to 30° latitude during autumn.",
+        "Tropical cyclones are born over tropical oceans with temperature ≥26.5°C over 50 m or more depth.\nEvaporation from the warm ocean into the windy boundary layer increases the energy in the storm, which ultimately drives a circulation similar to a\nCarnot-cycle heat engine. Tropical cyclones die over cold water and over land, not due to the extra drag caused by buildings and trees, but due mostly to the lack of strong evaporation from the ocean.",
+        "16.3.1.3. Nonlocal Conditional Instability \nBecause tropical cyclones are made of thunder­ storms, the tropical environment must have suf­ ficient nonlocal conditional instability to support deep thunderstorm convection. Namely, there must be a stable layer (i.e., a cap) above a warm humid boundary layer, and the mid-troposphere must be relatively cool compared to the boundary layer."
+      ],
+      "response": "根据提供的参考资料，台风（热带气旋）的形成需要同时满足以下七个必要条件：\n\n1.  **温暖的海面**：台风生成于热带海洋，要求海面温度至少为 26.5°C，且该高温层深度需达到 50 米或以上。温暖海水的蒸发为风暴提供了能量，驱动其像卡诺热机一样运转。\n2.  **非零的科里奥利力**：台风无法在赤道形成，因为赤道处没有科里奥利力，无法产生旋转。因此，台风最可能在纬度 10°至 30°之间形成，且不会跨越赤道。\n3.  **非局地对流不稳定**：由于台风由雷暴组成，环境必须具备足够的非局地对流不稳定，以支持深对流雷暴。这要求暖湿边界层上方存在一个稳定的盖层（cap），且中层大气相对于边界层要相对较冷。\n4.  **中层大气高湿度**：中层大气必须保持较高的湿度。\n5.  **弱的环境风切变**：环境中的风切变需要较弱。\n6.  **增强的天气尺度涡度**：需要存在增强的天气尺度涡度。\n7.  **触发机制**：需要一个触发机制来启动形成过程。\n\n此外，资料指出，一旦台风移动到冷水域或陆地上，由于缺乏来自海洋的强烈蒸发，它们就会消亡。",
+      "reference": "台风形成的必要条件包括：广阔的高温洋面（海温26.5℃以上）、充足的水汽、对流层风速垂直切变小、地转偏向力（科里奥利力）以及低层初始扰动。\nEnglish key points: Tropical cyclone formation requires: warm SST above 26.5C, abundant moisture, low vertical wind shear, Coriolis force, and a low-level disturbance.",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.8898,
+      "llm_context_precision_with_reference": 1.0,
+      "context_recall": 1.0
+    },
+    {
+      "user_input": "台风眼里的天气为什么很平静？",
+      "retrieved_contexts": [
+        "Roughly half of the tropical storms in the Atlan­ tic continue to strengthen into tropical cyclones. By this stage there is a well defined eye surrounded by an eyewall of thunderstorms. Max wind speeds are 33 m s–1 or greater in a closed circulation around the eye. The central dense overcast usually has a cloudfree eye. The weather map symbol for a tropical cy­ clone is .",
+        "16.8.2.1. Atmospheric Pressure Head \nIn the eye of the tropical cyclone, atmospheric surface pressure is lower than ambient. Hence the force per unit area pushing on the top of the water is less. This allows the water to rise in the eye until the additional head (weight of fluid above) of water compensates for the reduced head of air (Fig. 16.42).",
+        "There is no eye at this stage. Tropical storms are or­ ganized sufficiently to be able to modify their local environment to allow them to persist, without rely­ ing so much on a favorable ambient environment.",
+        "near the surface. The tropical cyclone core is warm, which causes high pressure to form in the eye near the top of the storm. This high pressure drives di­ verging, anticyclonic winds out of the tropical cy­ clone.",
+        "Tropical cyclones are vertically stacked, with the storm-top eye of the tropical cyclone almost directly above the storm-bottom eye [Fig. 16.c(a)]. Intense la­ tent heating in the tropical cyclone warms the whole depth of the troposphere near the core, causing high pressure aloft because warm layers of air have greater thickness than cold. This high pressure aloft causes air to diverge horizontally at the top of the tropical cy­ clone, which is why visible and IR satellite loops show cirrus and"
+      ],
+      "response": "根据提供的参考资料，台风（热带气旋）眼里的天气之所以平静，主要与以下物理机制有关：\n\n1.  **气压差异导致海水上升**：在台风眼内，地表大气压力低于周围环境。这意味着作用在水面上的空气压力减小，使得海水在眼区上升，直到上升水柱的重量（流体静压头）补偿了减少的空气压力头。\n2.  **核心高温与高空辐散**：台风核心区域存在强烈的潜热释放，这使得整个对流层核心区域变暖。暖空气层比冷空气层更厚，从而在台风顶部形成高压区。这种高空的高压驱动空气在台风顶部向外辐散（发散），形成反气旋式的风。\n3.  **垂直结构特征**：热带气旋是垂直堆叠的结构，风暴顶部的眼区几乎直接位于风暴底部的眼区之上。\n\n**需要说明的是**：虽然资料描述了台风眼内气压低、核心暖以及高空空气辐散等物理特征，但提供的【参考资料】中**并未直接明确描述**“台风眼内天气平静”的具体表现（如风力微弱、无云或少云等）及其直接成因的详细解释。资料仅提到成熟的热带气旋拥有“清晰定义的眼区，周围环绕着雷暴墙（eyewall）”，且中心密集云区通常具有“无云的眼区”，但未深入阐述眼内平静天气的形成机理。\n\n因此，关于台风眼内天气为何特别平静的具体解释，**参考资料中未涉及**。",
+      "reference": "台风眼内盛行下沉气流，空气绝热增温、云量少，因此天气晴朗无风或风力微弱，与眼区外围的狂风暴雨形成鲜明对比。\nEnglish key points: Inside the eye, subsiding air warms adiabatically with little cloud, so weather is calm and clear, in sharp contrast to the eyewall.",
+      "faithfulness": 0.9474,
+      "answer_relevancy": 0.0,
+      "llm_context_precision_with_reference": 0.0,
+      "context_recall": 0.0
+    },
+    {
+      "user_input": "为什么雷阵雨多发生在夏季午后？",
+      "retrieved_contexts": [
+        "Luckily, most thunderstorms over land have a very marked diurnal cycle, because atmospheric instability is strongly modulated by heating of the ground by the sun. Thunderstorms usually form in mid- to late-afternoon, are most frequent around sunset, and often dissipate during the night. As sketched in Fig. 14.76, the reason is that the greatest accumulation of heat (and moisture) in the bound­ ary layer occurs not at noon, but about a half hour before sunset.",
+        "Thunderstorms are like gigantic engines that convert fuel (moist air) into motion and precipitation via the process of condensation and latent heat re­ lease. Once triggered, thunderstorms can often sus­ tain themselves within a favorable environment for 15 minutes to several hours. They are most frequent in the late afternoon and evening over land. The explosive growth of thunderstorms, their relatively small diameters, and their sensitivity to initial con­ ditions make it difficult to",
+        "Drylines are observed during roughly 40 to 50% of all days in spring and summer in that part of the world. Similar drylines are observed in other parts of the world.\n\nDuring midday through afternoon, convective clouds are often triggered along the drylines as the less-dense moist air rides over the denser dry air.\nSome of these cloud bands grow into organized thunderstorm squall lines that can propagate east from the dryline.",
+        "Green shading shows that thunderstorms are most likely to form around sunset, plus or minus several hours sunrise sunrise sunset sunset sunrise sunrise sunset sunset day day night night night day day night night night\nF* (W/m2)\ntime time thunderstorm threshold\nQA (J/m2)\n(a)\n(b)\ncooling warming accumulated heat",
+        "There are notable exceptions to this daily cycle.\nFor example, thunderstorms can be triggered by the\nRocky Mountains in late afternoon, and then propa­ gate eastward all night to hit the Midwest USA with the greatest frequency around midnight to early morning.\n14.7.1. Outlooks, Watches & Warnings \nA thunderstorm is defined as “severe” in the\nUSA if it has one or more of the following:\n\n• tornadoes   • damaging winds (& any winds ≥ 25 m s–1)"
+      ],
+      "response": "根据提供的参考资料，雷阵雨多发生在夏季午后（特别是中晚至傍晚）的主要原因如下：\n\n1.  **地面加热导致大气不稳定**：陆地上大多数雷暴具有显著的日变化周期，这是因为大气的不稳定性受到太阳加热地面的强烈调节。\n2.  **热量与湿度的积累**：虽然正午太阳辐射最强，但边界层中热量（和水分）的最大积累通常发生在日落前约半小时。\n3.  **形成时间规律**：由于上述热量积累过程，雷暴通常在下午中后期形成，在日落前后最为频繁，并往往在夜间消散。\n\n此外，资料还提到雷暴像巨大的引擎，将潮湿空气转化为运动和降水，一旦触发，在有利环境中可持续存在数小时，这也解释了为何它们在下午和傍晚时段最为常见。\n\n*注：参考资料中未涉及具体的防御措施或针对特定实时天气的预警信息。*",
+      "reference": "夏季午后地面受太阳强烈加热，近地层空气温度高、不稳定能量积聚，容易触发强对流，形成局地雷阵雨。\nEnglish key points: Summer afternoons have strong surface heating, unstable air and accumulated CAPE, easily triggering local thunderstorms.",
+      "faithfulness": 0.8235,
+      "answer_relevancy": 0.9479,
+      "llm_context_precision_with_reference": 1.0,
+      "context_recall": 0.5
+    },
+    {
+      "user_input": "冷锋过境时天气有什么特点？",
+      "retrieved_contexts": [
+        "Issue: AFTER passage of the cold front is when significant temperature decreases are observed. BE­\nFORE passage of a warm front is when significant warming is observed.",
+        "As this airmass consists of cold air advecting over warmer ground, it is statically unstable, con­\nFigure 12.11 (both columns)\nCold front horizontal structure (maps can be overlain).\n= T (°C)\nIsotherms\nL warm cool 99.5 100.5 99.5\nP=100.5 kPa\nIsobars\nL frontal zone\nWinds\nL\nL warm and hazy clear skies\nWeather scattered cumulus or stratocumulus scattered thunderstorms squall line x y",
+        "Winds shift to a northerly direction behind the front, advecting colder air from the north. This air is often clean with excellent visibilities and clear blue skies during daytime. If sufficient moisture is present, scattered cumulus or broken stratocumulus clouds can form within the cold airmass.",
+        "Observers at the surface would notice stratiform clouds in advance of the front, which would nor­ mally signal an approaching warm front. However, instead of a surface warm front, a surface occluded front passes, and the surface temperature decreases like a cold front. The trailing edge of cool air aloft marks the warm front aloft.\nFigure 12.30",
+        "Fig. 12.30 shows a cold front occlusion, where very cold air that is very statically stable catches up to, and under-rides, cooler air that is less statically stable. The warm air that was initially between these two cold airmasses is forced aloft. Most oc­ clusions in interior N. America are of this type, due to the very cold air that advances from Canada in winter."
+      ],
+      "response": "根据提供的参考资料，冷锋过境时的天气特点如下：\n\n1.  **气温变化**：在冷锋**过境之后**，会观察到显著的温度下降。\n2.  **风向转变**：锋面过后，风向会转为偏北风（northerly direction），将北方的冷空气平流过来。\n3.  **能见度与天空状况**：\n    *   冷空气通常比较清洁，能见度极佳，白天常呈现晴朗的蓝天。\n    *   如果冷空气中含有足够的水汽，可能会形成分散的积云（cumulus）或破碎的层积云（stratocumulus）。\n4.  **降水与恶劣天气**：冷锋附近可能伴随分散的积云或层积云，也可能出现雷暴（thunderstorms）甚至飑线（squall line）。\n5.  **特殊情形（锢囚锋）**：如果是冷锋性质的锢囚锋（cold front occlusion）过境，虽然其结构涉及暖空气被抬升，但地表温度会像冷锋一样下降。\n\n参考资料中未涉及具体的实时气温数值或特定日期的天气情况。",
+      "reference": "冷锋过境时气温下降、气压升高，常出现偏北大风，锋后天气转晴；若暖气团水汽充足，过境时可能有降水。\nEnglish key points: A cold front passage brings falling temperature, rising pressure, northerly gales and clearing weather; rain is possible if the warm sector is moist.",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.6923,
+      "llm_context_precision_with_reference": 0.3333,
+      "context_recall": 0.0
+    },
+    {
+      "user_input": "云按云底高度如何分类？",
+      "retrieved_contexts": [
+        "Thus, low, middle and high clouds can have a range of altitudes. Table 6-1 lists cloud levels and their altitudes as defined by World Meteorologi­ cal Organization (WMO). These heights are only approximate, as you can see from the overlapping values in the table.",
+        "E10. The discrete cloud morphology and altitude classes of the official cloud classification are just points along a continuum of cloud shapes and al­ titudes. If you observe a cloud that looks halfway between two official cloud shapes, or which has an altitude between the typical altitudes for high, mid­ dle, or low, clouds, then what other info can you use as a weather observer to help classify the cloud?",
+        "For each cloud, record the relative diameter (i.e., the number of grid lines spanned horizontally by the cloud), and the relative height of each cloud base above the horizon (also in terms of number of grid lines). Then, for each cloud, divide the diameter by the cloud-base height to give a normalized diameter.\nThis corrects for perspective, assuming that cumu­ lus cloud bases are all at the same height.",
+        "Low altitude stratiform clouds include stratus and nimbostratus. In North America, nimbostra­ tus clouds often have low bases and are considered to be a low cloud. However, as we will see in the international cloud classification section, nimbo­ stratus clouds are traditionally listed as mid-level clouds. In this book, we will treat nimbostratus as stratiform rain clouds with low cloud base.",
+        "If the clouds are not buoyant (i.e., the cloud layer is statically stable), the clouds remain on the ground as fog, or they are forced into existence as stratiform clouds by advection along an isotropic surface over colder air, such as at a front.\n\nClouds can be classified by their altitude, shape, and appearance. Special symbols are used on weather maps to indicate cloud types and coverage."
+      ],
+      "response": "根据提供的参考资料，云按云底高度（海拔）主要分为低云、中云和高云三类。世界气象组织（WMO）在表 6-1 中列出了这些云层的定义高度，但需要注意的是，这些高度数值仅为近似值，不同类别的云层高度范围可能存在重叠。\n\n此外，资料中还特别提到，在北美地区，雨层云（nimbostratus）通常具有较低的云底，被视为低云；但在国际分类传统中，它常被列为中云。本书将其视为具有低云底的层状降水云。\n\n如果观测到的云形态介于两种官方云型之间，或者其高度介于高、中、低云的典型高度范围之间，仅凭高度可能难以直接分类，需要结合其他信息（如云的形态、相对直径与云底高度的比值等）进行综合判断。\n\n参考资料中未提供具体的云层高度数值表（如具体的米数或英尺数），仅说明了存在按高度分类的体系及重叠现象。",
+      "reference": "按云底高度云分为高云族、中云族、低云族三族，高云一般在6000米以上（卷云、卷积云、卷层云），中云2000-6000米（高积云、高层云），低云2000米以下（层积云、层云、积云等）。\nEnglish key points: Clouds are classified by base height into high (above 6 km: cirrus etc.), middle (2-6 km: altostratus etc.) and low (below 2 km: stratus, cumulus etc.).",
+      "faithfulness": 0.9412,
+      "answer_relevancy": 0.7328,
+      "llm_context_precision_with_reference": 0.0,
+      "context_recall": 0.0
+    },
+    {
+      "user_input": "露点温度和空气湿度有什么关系？",
+      "retrieved_contexts": [
+        "The dew-point temperature Td in the ABL is a good measure of the low-altitude humidity. High dew points also imply high air temperature, because",
+        "T ≥ Td always (see the Water Vapor chapter). Higher temperatures indicate more sensible heat, and high­ er humidity indicates more latent heat. Thus, high dew points in the ABL indicate a large fuel supply in the ABL environment that can be tapped by thun­ derstorms. Thunderstorms in regions with Td ≥ 16°C can have heavy precipitation, and those in regions with Td ≥ 21°C can have greater severity.",
+        "(T), dew-point temperature (Td), and wind speed (M) and direction (α) at various heights (z) or pressures (P).",
+        "An alternative moisture variable is mixing ra­ tio, r. Large mixing-ratio values are possible only if the air is warm (because warm air can hold more water vapor at saturation), and indicate greater en­ ergy available for thunderstorms. For example, Fig.\n14.29 shows isohumes of mixing ratio.\nWet-bulb temperature Tw , wet-bulb po­ tential temperature θw , equivalent potential temperature θe , or liquid-water potential tem­ perature θL also indicate moisture. Recall from",
+        "A17(§). In spring, humid tropical air of initial tem­ perature and dew point as given below flows over colder land of surface temperature 2 °C. At what downwind distance will advection fog form? Also plot the air temperature vs. distance. Assume zi = 200 m, and CH = 0.005 ."
+      ],
+      "response": "根据提供的参考资料，露点温度与空气湿度的关系如下：\n\n1.  **衡量低空湿度**：边界层（ABL）中的露点温度（Td）是衡量低空湿度的良好指标。\n2.  **与气温的关联**：露点温度高通常意味着空气温度也较高（因为气温 T 总是大于或等于露点温度 Td）。\n3.  **能量储备指标**：高露点温度不仅代表高湿度，还意味着边界层环境中存在大量的“燃料”（即潜热），这些能量可供雷暴利用。\n    *   在露点温度大于或等于 16°C 的地区，雷暴可能产生强降水。\n    *   在露点温度大于或等于 21°C 的地区，雷暴的强度可能更大。\n\n此外，资料还提到其他表示湿度的变量（如混合比、湿球温度等），其中混合比数值大也仅当空气温暖时才可能，同样指示了雷暴可用的能量更多。",
+      "reference": "露点温度是空气冷却达到饱和时的温度，露点越高说明空气中水汽含量（绝对湿度）越大；气温与露点之差越小，相对湿度越大。\nEnglish key points: Dew point is the temperature at which air becomes saturated; higher dew point means more water vapor, and smaller dew-point depression means higher relative humidity.",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.7135,
+      "llm_context_precision_with_reference": 0.0,
+      "context_recall": 0.0
+    },
+    {
+      "user_input": "什么是温室效应？",
+      "retrieved_contexts": [
+        "Of concern these days is human-caused global warming. While most scientists suspect that there will be some effect on tropical cyclones if global warming continues, they have not yet found a clear signal. Debate continues.",
+        "什么是藤原效应?视频详情视频内容:今年第7号台风”范斯高“、第8号台风”竹节草“、第9号台风”罗莎“先后生成,西北太平洋三台共舞,其中”范斯高“和”竹节草“相互拉扯形成”藤原效应“,那么什么是藤原效应?来源:编辑:李茜发布时间:2025-07-24 18:00:46热点视频四个热带气旋共舞?!少见!暴雨 强对流 南北方都有!今年第20号台风“简拉维”登陆三伏结束 高温犹在",
+        "“What if” questions are often asked by scientists, engineers, and policy makers. For example, “What if the amount of carbon dioxide in the atmosphere doubled, then how would world climate change?”",
+        "1.4. THERMODYNAMIC STATE \nThe thermodynamic state of air is measured by its pressure (P), density (ρ), and temperature (T).\n1.4.1. Temperature \nWhen a group of molecules (microscopic) move predominantly in the same direction, the motion is called wind (macroscopic). When they move in random directions, the motion is associated with temperature. Higher temperatures T are associated with greater average molecular speeds v :",
+        "The wedge of warm air (Fig. 12.32) pushed up between the cool and cold airmasses is called a\nTROWAL, an acronym that means “trough of warm air aloft.” This TROWAL, labeled in Fig.\n12.31a, touches the ground at the triple point, but tilts toward higher altitudes further north. Under the TROWAL can be significant precipitation and se­ vere weather at the surface (Fig. 12.31b) — hence it is important for weather forecasting."
+      ],
+      "response": "参考资料中未涉及温室效应的具体定义或详细解释。\n\n资料中仅提及了人类引起的全球变暖（human-caused global warming）以及关于大气中二氧化碳含量变化对世界气候影响的探讨，但未直接阐述“温室效应”这一概念本身。",
+      "reference": "温室效应指大气中的水汽、二氧化碳等温室气体吸收地面长波辐射并向地面逆辐射，使地表温度高于没有大气时的温度的现象。\nEnglish key points: The greenhouse effect: water vapor, CO2 and other gases absorb surface longwave radiation and re-radiate back, keeping the surface warmer than an airless earth.",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.0,
+      "llm_context_precision_with_reference": 0.0,
+      "context_recall": 0.0
+    },
+    {
+      "user_input": "暴雨可能引发哪些次生灾害？",
+      "retrieved_contexts": [
+        "。防御:停止集会、停课、停业(除特殊行业外);做好山洪、滑坡、泥石流等灾害的防御和抢险工作。\n* 科普要点- 成因:暴雨常由强对流天气、锋面系统、台风外围环流或低涡切变线等系统造成,充沛的水汽输送与强烈上升运动是必要条件;城市热岛效应会加剧局地短时强降雨。\n- 灾害链:暴雨可引发城市内涝、山洪、滑坡、泥石流等次生灾害,山区与低洼地带风险最高。\n- 日常预防:关注气象部门预警信息,暴雨红色预警时避免外出;不在低洼地带、地下空间逗留;驾车绕开积水路段,不强行涉水。\n- 数据口径:气象上\"暴雨\"指 24 小时降水量达 50~99.9 毫米,100~249.9 毫米为\"大暴雨\",250 毫米以上为\"特大暴雨\"。",
+        "暴雨预警信号科普卡* 分级1. 蓝色:12 小时内降雨量将达 50 毫米以上,或者已达 50 毫米以上且降雨可能持续。防御:学校、幼儿园采取适当措施,保证学生安全;驾驶人员注意道路积水和交通阻塞;检查城市、农田、鱼塘排水系统,做好排涝准备。\n2. 黄色:6 小时内降雨量将达 50 毫米以上,或者已达 50 毫米以上且降雨可能持续。防御:交通管理部门根据路况在强降雨路段采取交通管制措施;切断低洼地带有危险的室外电源,暂停户外作业;转移危险地带与危房中的人员到安全场所避雨。\n3. 橙色:3 小时内降雨量将达 50 毫米以上,或者已达 50 毫米以上且降雨可能持续。防御:切断有危险的室外电源,暂停户外作业;处于危险地带的单位应当停课、停业;做好城市、农田的排涝,注意防范可能引发的山洪、滑坡、泥石流等灾害。\n4. 红色:3 小时内降雨量将达 100 毫米以上,或者已达 100 毫米以上且降雨可能持续。防御:停止集会、停课、停业(除特殊行业外);做好山洪、滑坡、泥石流等灾害的防御和抢险工作",
+        "Now that we are finished with the sections on the formation conditions and characteristics of thun­ derstorms we will proceed into the next chapter on\nThunderstorm Hazards. These include heavy rain, hail, downbursts of wind, gust fronts, lightning, thunder, and tornadoes.\nFigure 14.79\nAll storm reports during 24 May 2006 of damaging wind, hail, and tornadoes in the central USA.\nWind Reports\nHail Reports\nTornado Reports\nIL\nIN\nKY\nMO\nIA\nMI\nWI\nFigure 14.78",
+        "There will be a substantial percentage of roof and siding damage to apartment buildings and industrial buildings. Unreinforced masonry walls can collapse. Windows in high-rise buildings can be broken by flying debris. Falling and broken glass will pose a significant danger even after the storm. Commercial signage, fences, and canopies will be damaged and often destroyed. Many shallowly rooted trees will be snapped or uprooted and block numerous roads. Near-total power loss is expected with",
+        "Fig. 14.11), then these storms can remain stationary over a mountain watershed for many hours, funnel­ ing heavy rains into canyons, and causing devastat­ ing flash floods. One example is the Big Thomp­ son Canyon flood in the Colorado Rockies, which killed 139 people in 1976 (see the Exposition in the\nThunderstorm Hazards chapter)."
+      ],
+      "response": "根据参考资料，暴雨可能引发的次生灾害主要包括：\n\n1.  **城市内涝**：暴雨常导致城市排水系统不堪重负，引发积水。\n2.  **山洪**：特别是在山区，充沛的水汽和强烈上升运动容易诱发山洪。\n3.  **滑坡与泥石流**：暴雨是引发滑坡和泥石流的主要诱因，其中山区与低洼地带的风险最高。\n\n此外，资料还提到，如果强对流天气系统（如雷暴）在山地流域长时间停滞，会将大量雨水灌入峡谷，从而引发毁灭性的**山洪暴发**（如科罗拉多落基山脉的“大汤普森峡谷洪水”案例）。\n\n**防御建议**：\n在暴雨期间，应重点关注气象部门发布的预警信息。一旦发布暴雨红色预警，应停止集会、停课、停业（特殊行业除外），并切实做好山洪、滑坡、泥石流等灾害的防御和抢险工作。日常预防中，应避免在低洼地带、地下空间逗留，驾车时绕开积水路段，切勿强行涉水。",
+      "reference": "暴雨可能引发山洪、滑坡、泥石流、城市内涝等次生灾害，低洼地带和地下空间风险尤其高。\nEnglish key points: Rainstorms can trigger flash floods, landslides, debris flows and urban waterlogging; low-lying areas and underground spaces are especially at risk.",
+      "faithfulness": 0.8182,
+      "answer_relevancy": 0.9267,
+      "llm_context_precision_with_reference": 1.0,
+      "context_recall": 0.5
+    },
+    {
+      "user_input": "气象灾害预警信号由谁发布？",
+      "retrieved_contexts": [
+        "《国家气象灾害应急预案》台风节选2020-07-29 15:22:05来源:4.4.1台风、大风气象部门加强监测预报,及时发布台风、大风预警信号及相关防御指引,适时加大预报时段密度。\n海洋部门密切关注管辖海域风暴潮和海浪发生发展动态,及时发布预警信息。\n防汛部门根据风灾风险评估结果和预报的风力情况,与地方人民政府共同做好危险地带和防风能力不足的危房内居民的转移,安排其到安全避风场所避风。\n民政部门负责受灾群众的紧急转移安置并提供基本生活救助。\n住房城乡建设部门采取措施,巡查、加固城市公共服务设施,督促有关单位加固门窗、围板、棚架、临时建筑物等,必要时可强行拆除存在安全隐患的露天广告牌等设施。\n交通运输、农业部门督促指导港口、码头加固有关设施,督促所有船舶到安全场所避风,防止船只走锚造成碰撞和搁浅;督促运营单位暂停运营、妥善安置滞留旅客。\n教育部门根据防御指引、提示,通知幼儿园、托儿所、中小学和中等职业学校做好停课准备;避免在突发大风时段上学放学。\n住房城乡建设、交通运输等部门通知高空、水上等户外作业单位做好防风准备,必要时采取停止作业措施,安排人员到安全避风场所避风",
+        "asks for \"《气象灾害预警信号发布与传播办法》(中国气象局令第 16 号,2007 年)\".* *Strict Adherence:* I must follow the 2007 version. In the 2007 version, the Thunderstorm Warning Signal consists of Yellow and Red levels. (Note: Some regions later added Blue, but the national standard in 2007 was Yellow/Red).* *Wait, actually:* Let me check the specific attachment content for 2007 Order No. 16.* *Search Query Simulation:* \"气象灾害预警信号发布与传播办法 2007 雷电\".* *Result:* In the 2007 version, the Thunderstorm Warning Signal (雷电预警信号) has",
+        "。及时发布航行警告,必要时进行海上交通管制。防台风期间,当船舶、海上设施遇险时,配合海上搜寻救助工作。\n(22)省气象局:负责天气气候预测预报工作,及时向社会公众发布气象预报和台风、暴雨等灾害性天气警报,并根据天气变化情况及时补充或订正。对降雨、台风及未来趋势作出分析和预报,并及时报省政府及省指挥部和有关成员单位。及时发布突发气象灾害预警信号,重大气象灾害预警信息通过媒体向社会公众滚动播报。\n(23)省通信管理局:负责组织、协调通信运营企业做好汛期的通信保障工作,保障全省防汛等重要部门的通讯畅通,确保雨情、水情、汛情等防台风信息和调度指令传递的通讯畅通,协调调度应急通信设备。\n(24)省效能办:监督防洪防台风责任制的落实。负责对防洪防台风责任制和抢险救灾调度指令执行情况进行督查,对有关领导和责任人不到位、工作失职渎职并造成严重后果的,按照有关规定追究责任。\n(25)华电福建公司:组织所属水电厂按照批准的汛期调度运用计划实施水库调度;按照防汛指挥机构的调度指令,做好水库防洪调度。\n(26)省电力公司:负责做好防洪防台风用电保障工作,保障全省防汛等重要部门的工作用电",
+        "雷电预警信号) according to the 2007 Order No. 16.* *Correction/Verification:* In the 2007 Order No. 16, the \"Thunderstorm Warning Signal\" (雷电预警信号) actually has two levels: Yellow (黄色) and Red (红色). Wait, let me double-check.* *Re-evaluation:* According to the 2007 version (Order No. 16), the Thunderstorm Warning Signal was indeed divided into Yellow and Red. However, later revisions (2010, 2013, etc.) might have added Blue. But the prompt specifically asks for \"《气象灾害预警信号发布与传播办法》(中国气象局令第 16 号,2007",
+        "。\n4.4.3 县级以上建设、海洋与渔业、国土资源、水利等部门按职责分工组织对危险区域人员、房屋和船只、病险水利工程等调查,并登记造册,报同级防指备案。\n4.5 台风及次生灾害预警4.5.1 台风影响预警气象部门加强台风监测和预报,根据《浙江省气象灾害预警信号发布实施办法》及时对台风影响情况进行预警。可能受台风影响地区的防汛防旱指挥机构应加强值班,跟踪台风动向,研究防御对策,明确防御重点,及时将有关信息向社会发布。\n4.5.2 降雨实时预警水文部门应加强降雨监测,当出现强降雨时,应及时向有关防汛防旱指挥机构报告,并通报乡镇政府。县级防汛防旱指挥机构收到水文部门的降雨信息后,立即向有关乡镇政府和单位发出警报。乡镇政府和有关单位得到降雨警报后,立即向有关地区发出预警。\n4.5.3山洪灾害预警山洪灾害易发区应建立专业监测与群测群防相结合的监测体系,落实观测措施。有关乡镇、村、组和相关单位的巡查预警员,在台汛期坚持每天巡查制度,降雨期间,加密观测巡查,一旦发现危险征兆,立即向可能受影响地区发出警报,转移群众,并报乡镇政府或县防汛防旱指挥机构"
+      ],
+      "response": "根据提供的参考资料，气象灾害预警信号的发布主体如下：\n\n1.  **气象部门**：负责加强监测预报，及时发布台风、大风、暴雨等灾害性天气的预警信号及相关防御指引。在台风影响期间，气象部门需根据监测和预报情况，及时对台风影响情况进行预警，并视情况补充或订正预报。\n2.  **海洋部门**：负责密切关注管辖海域风暴潮和海浪的发生发展动态，并及时发布相关预警信息。\n3.  **水文部门**：在出现强降雨时，负责加强监测，并向防汛防旱指挥机构报告，通报乡镇政府，协助发出警报。\n4.  **乡镇、村、组及相关单位**：在山洪灾害易发区，巡查预警员在发现危险征兆时，需立即向可能受影响地区发出警报。\n\n此外，重大气象灾害预警信息通常通过媒体向社会公众进行滚动播报。\n\n*注：参考资料中未涉及雷电预警信号的具体发布层级细节（仅提及了预警信号的等级标准），也未涉及除上述灾害类型外的其他具体预警发布主体。*",
+      "reference": "气象灾害预警信号由各级气象主管机构所属的气象台站按职责向社会统一发布，其他组织和个人不得向社会发布。\nEnglish key points: Warning signals are issued uniformly by meteorological stations under the competent meteorological departments; no other organization or individual may issue them.",
+      "faithfulness": 0.75,
+      "answer_relevancy": 0.8069,
+      "llm_context_precision_with_reference": 0.3333,
+      "context_recall": 0.0
+    },
+    {
+      "user_input": "遇到山洪应该如何避险？",
+      "retrieved_contexts": [
+        "。城市、村镇和其他居民点以及工厂、矿山、铁路和公路干线的布局,应当避开山洪威胁;已经建在受山洪威胁的地方的,应当采取防御措施。\n第十四条 平原、洼地、水网圩区、山谷、盆地等易涝地区的有关地方人民政府,应当制定除涝治涝规划,组织有关部门、单位采取相应的治理措施,完善排水系统,发展耐涝农作物种类和品种,开展洪涝、干旱、盐碱综合治理。\n城市人民政府应当加强对城区排涝管网、泵站的建设和管理。\n第十五条 国务院水行政主管部门应当会同有关部门和省、自治区、直辖市人民政府制定长江、黄河、珠江、辽河、淮河、海河入海河口的整治规划。\n在前款入海河口围海造地,应当符合河口整治规划。\n第十六条 防洪规划确定的河道整治计划用地和规划建设的堤防用地范围内的土地,经土地管理部门和水行政主管部门会同有关地区核定,报经县级以上人民政府按照国务院规定的权限批准后,可以划定为规划保留区;该规划保留区范围内的土地涉及其他项目用地的,有关土地管理部门和水行政主管部门核定时,应当征求有关部门的意见。规划保留区依照前款规定划定后,应当公告",
+        "。防御:停止集会、停课、停业(除特殊行业外);做好山洪、滑坡、泥石流等灾害的防御和抢险工作。\n* 科普要点- 成因:暴雨常由强对流天气、锋面系统、台风外围环流或低涡切变线等系统造成,充沛的水汽输送与强烈上升运动是必要条件;城市热岛效应会加剧局地短时强降雨。\n- 灾害链:暴雨可引发城市内涝、山洪、滑坡、泥石流等次生灾害,山区与低洼地带风险最高。\n- 日常预防:关注气象部门预警信息,暴雨红色预警时避免外出;不在低洼地带、地下空间逗留;驾车绕开积水路段,不强行涉水。\n- 数据口径:气象上\"暴雨\"指 24 小时降水量达 50~99.9 毫米,100~249.9 毫米为\"大暴雨\",250 毫米以上为\"特大暴雨\"。",
+        "。\n第十六条 关于河道清障和对壅水、阻水严重的桥梁、引道、码头和其他跨河工程设施的改建或者拆除,按照《中华人民共和国河道管理条例》的规定执行。\n第十七条 蓄滞洪区所在地的省级人民政府应当按照国务院的有关规定,组织有关部门和市、县,制定所管辖的蓄滞洪区的安全与建设规划,并予实施。\n各级地方人民政府必须对所管辖的蓄滞洪区的通信、预报警报、避洪、撤退道路等安全设施,以及紧急撤离和救生的准备工作进行汛前检查,发现影响安全的问题,及时处理。\n第十八条 山洪、泥石流易发地区,当地有关部门应当指定预防监测员及时监测。雨季到来之前,当地人民政府防汛指挥部应当组织有关单位进行安全检查,对险情征兆明显的地区,应当及时把群众撤离险区。\n风暴潮易发地区,当地有关部门应当加强对水库、海堤、闸坝、高压电线等设施和房屋的安全检查,发现影响安全的问题,及时处理。\n第十九条 地区之间在防汛抗洪方面发生的水事纠纷,由发生纠纷地区共同的上一级人民政府或其授权的主管部门处理。\n前款所指人民政府或者部门在处理防汛抗洪方面的水事纠纷时,有权采取临时紧急处置措施,有关当事各方必须服从并贯彻执行",
+        "。\n(4)快速反应,部门联动。发生台风及次生灾害时,当地政府应迅速响应,各有关部门联合行动,及时、高效地开展预防和应急处置。\n(5)抓好“四进”,加强基层。坚持防台应急管理进农村、进社区、进企业、进学校的方针,加强基层防台风工作,落实各项预防和应急措施,提高基层防台风的能力。\n1.5 工作重点(1)组织危险地区、危险地段人员安全转移;(2)组织出海船舶及时回港避风;(3)水库、海塘、水闸等水利工程保安;(4)小流域山洪、泥石流、山体滑坡防范和人员避险;(5)城乡高层建筑工地、广告牌、铁塔、行道树、电线杆、天线等高空设施防风保安,城乡低洼地区的防洪排涝;(6)风、雨、潮的预测预报和预警,并及时向公众发布台风信息。\n2 组织指挥体系2.1 省政府防汛防旱指挥部防台抢险救灾工作实行各级人民政府行政首长负责制,实行统一指挥,分级分部门负责。浙江省人民政府防汛防旱指挥部(以下简称省防指)负责全省防台抢险救灾工作。当预报12级以上台风正面登陆或严重影响我省时,省委、省政府部署防台抢险救灾工作,省防指具体组织实施",
+        "be carried away. An easy solution is to approach each flooded road with caution, and be prepared to interrupt your journey and wait until the flood waters subside."
+      ],
+      "response": "根据提供的参考资料，遇到山洪时的避险与防御措施如下：\n\n**1. 提前预防与规划**\n*   **避开威胁区**：城市、村镇、居民点以及工厂、矿山、铁路和公路干线的布局应避开山洪威胁。对于已经建在受山洪威胁地方的，应当采取防御措施。\n*   **加强监测**：在山洪易发地区，当地有关部门应指定预防监测员及时监测。\n*   **汛前检查**：在雨季到来之前，当地人民政府防汛指挥部应组织有关单位进行安全检查。\n\n**2. 紧急避险与撤离**\n*   **及时撤离**：一旦发现险情征兆明显，当地人民政府防汛指挥部应当及时把群众撤离险区。\n*   **安全转移**：发生台风及次生灾害（如山洪）时，当地政府应迅速响应，组织危险地区、危险地段的人员进行安全转移。\n*   **避开低洼地带**：日常预防中，应避免在低洼地带逗留。\n\n**3. 灾害防御与抢险**\n*   **做好防御工作**：在暴雨等天气下，需做好山洪、滑坡、泥石流等灾害的防御和抢险工作。\n*   **停止聚集活动**：在发布相关预警时，应停止集会、停课、停业（特殊行业除外），以减少人员暴露风险。\n*   **工程保安**：加强对水库、海塘、水闸等水利工程的保安工作，防止因工程问题加剧山洪风险。\n\n**4. 交通与出行安全**\n*   **谨慎涉水**：遇到积水路段应绕开，不强行涉水。如果车辆被洪水冲走或被困，应谨慎接近被淹道路，必要时中断行程，等待洪水退去。\n\n**5. 预警响应**\n*   **关注信息**：密切关注气象部门发布的预警信息。\n*   **快速响应**：一旦发生山洪，当地政府及各部门应迅速联动，开展预防和应急处置。",
+      "reference": "遇到山洪应向高处转移，不要沿行洪道方向逃跑，不要涉水过河，远离低洼地带和地下空间。\nEnglish key points: In flash floods: move to high ground, never flee along the flood channel, never wade across rivers, stay away from low-lying and underground areas.",
+      "faithfulness": 1.0,
+      "answer_relevancy": 0.7442,
+      "llm_context_precision_with_reference": 0.0,
+      "context_recall": 0.0
+    },
+    {
+      "user_input": "霜冻对农业有什么危害？怎么防御？",
+      "retrieved_contexts": [
+        "。\n* Yellow (黄色): 24 小时内地面最低温度下降到 0°C以下,对农业已经产生影响或者可能产生影响。\n* *Note:* There is no Orange or Red for Frost in the standard 2007 regulation.* Defense Guidelines (General for Frost):* 1. 政府及相关部门按照职责做好防霜冻准备工作。\n* 2. 对农作物、蔬菜、花卉、瓜果、林业育种要采取一定的防护措施。\n* 3. 农村基层组织和农户要关注当地霜冻预警信息,及时采取措施",
+        "。\n* 蓝色标准:48 小时内地面最低温度下降到 0°C以下,对农业已经产生影响或者可能产生影响。\n* 黄色标准:24 小时内地面最低温度下降到 0°C以下,对农业已经产生影响或者可能产生影响。\n* 防御指南:(Same for both)1. 政府及相关部门按照职责做好防霜冻准备工作;2. 对农作物、蔬菜、花卉、瓜果、林业育种要采取一定的防护措施;3. 农村基层组织和农户要关注当地霜冻预警信息,及时采取措施",
+        "。\n防御指南:(1) 政府及相关部门按照职责做好防霜冻准备工作;(2) 对农作物、蔬菜、花卉、瓜果、林业育种要采取一定的防护措施;(3) 农村基层组织和农户要关注当地霜冻预警信息,及时采取措施。\n\n2. 黄色预警图标含义:较重霜冻发布标准:24 小时内地面最低温度下降到 0°C以下,对农业已经产生影响或者可能产生影响。\n防御指南:(1) 政府及相关部门按照职责做好防霜冻准备工作;(2) 对农作物、蔬菜、花卉、瓜果、林业育种要采取一定的防护措施;(3) 农村基层组织和农户要关注当地霜冻预警信息,及时采取措施。\n\n二、科普要点成因:夜间晴朗无风,地面辐射散热快,近地面气温骤降至 0°C以下。\n防范:关注天气预报,提前覆盖作物;熏烟增温;清晨灌水保温;设施农业注意通风换气。\n\n5. Review and Edit:* Check character count.* Check formatting (no tables, plain text).* Check accuracy (Blue is 48h, Yellow is",
+        "。\n* 3. 农村基层组织和农户要关注当地霜冻预警信息,及时采取措施。\n* *Wait, are there specific guidelines per level?* Usually, the defense guidelines are the same for Blue and Yellow in the original text, but sometimes they are slightly differentiated or just listed once. Let's check the attachment text.* *Attachment Text Check:** 霜冻预警信号分二级,分别以蓝色、黄色表示。\n* 防御指南:1. 政府及相关部门按照职责做好防霜冻准备工作;2. 对农作物、蔬菜、花卉、瓜果、林业育种要采取一定的防护措施;3. 农村基层组织和农户要关注当地霜冻预警信息,及时采取措施",
+        "。\n* Red: 1. 采取极端防护措施;2. 人员尽量留在室内;3. 农业设施加固。\n* *Actually, the 2007 document's \"Cold Wave\" section:** Blue: 48h, drop 8°C, min 4°C. Defense: 1. 政府及相关部门按照职责做好防寒潮准备工作;2. 老弱病幼人群注意保暖;3. 农业做好防寒防冻。\n* Yellow: 24h, drop 10°C, min 4°C. Defense: 1. 做好防寒准备;2. 减少户外活动;3. 农业设施加固。\n* Orange: 24h, drop 12°C, min 2°C. Defense: 1. 停止露天活动;2. 交通部门注意防滑;3. 农业设施加固。\n* Red: 24h, drop 16°C, min 0°C. Defense: 1. 采取极端防护措施;2. 人员尽量留在室内;3. 农业设施加固"
+      ],
+      "response": "根据提供的参考资料，关于霜冻对农业的危害及防御措施如下：\n\n**一、霜冻对农业的危害**\n霜冻发生时，由于夜间晴朗无风，地面辐射散热快，导致近地面气温骤降至 0°C 以下。这种低温环境会对农业产生直接影响或潜在影响，具体表现为对农作物、蔬菜、花卉、瓜果以及林业育种造成损害。\n\n**二、防御措施**\n针对霜冻的防御，资料中提供了通用的防御指南以及具体的科普防范要点：\n\n1.  **通用防御指南**：\n    *   政府及相关部门应按照职责做好防霜冻准备工作。\n    *   对农作物、蔬菜、花卉、瓜果、林业育种要采取一定的防护措施。\n    *   农村基层组织和农户要关注当地霜冻预警信息，并及时采取措施。\n\n2.  **具体防范技术**：\n    *   **提前覆盖**：关注天气预报，提前对作物进行覆盖。\n    *   **熏烟增温**：通过熏烟的方式提高近地面温度。\n    *   **灌水保温**：在清晨进行灌水，利用水的比热容特性进行保温。\n    *   **设施管理**：对于设施农业，要注意通风换气，防止因环境封闭导致的问题。\n\n注：霜冻预警信号分为蓝色（48 小时内降温至 0°C 以下）和黄色（24 小时内降温至 0°C 以下），两者的防御指南内容基本一致。参考资料中未涉及霜冻对农业造成具体经济损失金额或特定作物品种的详细受害机理描述。",
+      "reference": "霜冻使作物细胞结冰受害，造成减产。防御措施包括熏烟、覆盖、灌溉、选用耐寒品种和调整播期避开霜期。\nEnglish key points: Frost causes ice formation in plant cells and yield loss; defenses include smudging, covering, irrigation, cold-resistant varieties and adjusting sowing dates.",
+      "faithfulness": 0.7742,
+      "answer_relevancy": 0.8405,
+      "llm_context_precision_with_reference": 0.3333,
+      "context_recall": 0.0
+    }
+  ]
 }

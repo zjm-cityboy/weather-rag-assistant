@@ -12,7 +12,7 @@
 
 services:
   db:
-    image: pgvector/pgvector:pg18
+    image: pgvector/pgvector:pg18            # PG18：挂父目录，数据在卷内 18/docker 子目录
     container_name: weather-pg
     environment:
       POSTGRES_PASSWORD: weather_dev_2026
@@ -20,7 +20,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - weather_pgdata:/var/lib/postgresql     # PG18 必须挂父目录（pitfalls 第 7 条）
+      - weather_pgdata:/var/lib/postgresql   # PG18 要求挂父目录（挂 PGDATA 本身会拒绝启动）
     healthcheck:                                # backend 等库就绪再启动
       test: ["CMD-SHELL", "pg_isready -U postgres -d weather"]
       interval: 5s
@@ -54,12 +54,19 @@ services:
     environment:
       # 容器内走 compose 服务名（覆盖 .env 的 localhost 默认值）
       PG_DSN: "host=db port=5432 dbname=weather user=postgres password=weather_dev_2026"
+      PGHOST: "db"                              # init_db.py 的连接参数（独立于 PG_DSN）
       NEO4J_URI: "bolt://graph:7687"
       QWEATHER_PRIVATE_KEY_PATH: "/keys/ed25519-private.pem"
     volumes:
       - ./backend/keys:/keys:ro                 # 和风私钥只读挂载（不进镜像）
     ports:
       - "8000:8000"
+    healthcheck:                                # frontend 依赖此健康再启动（防 nginx 解析失败）
+      test: ["CMD", "python", "-c",
+             "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
     depends_on:
       db:
         condition: service_healthy
@@ -74,8 +81,16 @@ services:
     ports:
       - "5173:80"
     depends_on:
-      - backend
+      backend:
+        condition: service_healthy               # 等 /health 通了再起 nginx（upstream 可解析）
 
 volumes:
+  # external=true：直接接管 docker run 时代创建的裸卷（2675 知识块/用户/图谱全在里面）。
+  # 注意 Compose 默认会给卷名加项目前缀（<项目名>_weather_pgdata）——不声明 external
+  # 就会悄悄创建一个新的空卷，造成"数据丢了"的假象（pitfalls 第 12 条）
   weather_pgdata:
+    external: true
+    name: weather_pgdata
   weather_neo4jdata:
+    external: true
+    name: weather_neo4jdata
