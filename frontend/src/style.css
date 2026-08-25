@@ -1,0 +1,18 @@
+/* 全局基础样式（聊天应用只需重置 + 默认字体色） */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', 'Microsoft YaHei', system-ui, sans-serif;
+  color: #303133;
+  background: #fff;
+}
+
+/* AI 回答的 markdown 内容区（scoped 外的全局样式） */
+.md p { margin: 4px 0; }
+.md ul, .md ol { padding-left: 20px; margin: 4px 0; }
+.md code { background: #eef1f6; padding: 1px 4px; border-radius: 3px; font-size: 13px; }
+.md strong { color: #409eff; }
+.md a { color: #409eff; }

@@ -1,0 +1,16 @@
+# 根级 .dockerignore：构建上下文（项目根）里不进镜像的内容
+**/__pycache__
+**/.mimosa
+**/.ruff_cache
+**/node_modules
+**/dist
+backend/.env
+backend/keys
+backend/.env.example
+datas
+frontend
+docs
+*.md
+# scripts 整体排除，仅放行 init_db.py（容器启动建表用）
+scripts
+!scripts/db/init_db.py

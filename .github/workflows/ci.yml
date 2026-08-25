@@ -1,0 +1,25 @@
+> CI 说明：push 到任意分支自动跑静态检查与纯函数单测（离线可跑，不依赖数据库/外网密钥）。
+> pytest 的 JWT 用例通过 monkeypatch 注入测试密钥，绕过 .env（仓库无密钥文件）。
+
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: 安装依赖
+        run: |
+          pip install -r backend/requirements.txt
+          pip install ruff
+      - name: 静态检查（ruff）
+        run: ruff check backend/ scripts/
+      - name: 单元测试（pytest，纯函数离线可跑）
+        working-directory: backend
+        run: python -m pytest tests/ -v

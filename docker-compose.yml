@@ -1,0 +1,81 @@
+# 一键部署：pgvector + Neo4j + FastAPI 后端 + nginx 前端
+#
+# 用法（项目根目录）：
+#   1) 先移除手动创建的同名容器（数据在命名卷里，不会丢）：
+#      docker rm -f weather-pg weather-neo4j
+#   2) 启动全部服务：  docker compose up -d --build
+#   3) 访问：          http://localhost:5173（前端，/api 自动反代到后端）
+#
+# 数据说明：
+#   - 卷 weather_pgdata / weather_neo4jdata 与手动部署时同名，已有知识库数据直接复用
+#   - 全新环境：backend 启动时自动建表；知识块/图谱重建命令见 README 部署章节
+
+services:
+  db:
+    image: pgvector/pgvector:pg18
+    container_name: weather-pg
+    environment:
+      POSTGRES_PASSWORD: weather_dev_2026
+      POSTGRES_DB: weather
+    ports:
+      - "5432:5432"
+    volumes:
+      - weather_pgdata:/var/lib/postgresql     # PG18 必须挂父目录（pitfalls 第 7 条）
+    healthcheck:                                # backend 等库就绪再启动
+      test: ["CMD-SHELL", "pg_isready -U postgres -d weather"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  graph:
+    image: neo4j:5.26-community
+    container_name: weather-neo4j
+    environment:
+      NEO4J_AUTH: neo4j/weather_graph_2026
+    ports:
+      - "7474:7474"                             # 浏览器可视化
+      - "7687:7687"                             # Bolt
+    volumes:
+      - weather_neo4jdata:/data
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:7474 >/dev/null || exit 1"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  backend:
+    build:
+      context: .                                # 项目根做上下文（init_db.py 在 scripts/）
+      dockerfile: backend/Dockerfile
+    container_name: weather-backend
+    command: sh -c "python init_db.py && uvicorn app.main:app --host 0.0.0.0 --port 8000"
+    env_file:
+      - backend/.env                            # 模型/和风/JWT/Neo4j 密钥（不进镜像）
+    environment:
+      # 容器内走 compose 服务名（覆盖 .env 的 localhost 默认值）
+      PG_DSN: "host=db port=5432 dbname=weather user=postgres password=weather_dev_2026"
+      NEO4J_URI: "bolt://graph:7687"
+      QWEATHER_PRIVATE_KEY_PATH: "/keys/ed25519-private.pem"
+    volumes:
+      - ./backend/keys:/keys:ro                 # 和风私钥只读挂载（不进镜像）
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+      graph:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: weather-frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+
+volumes:
+  weather_pgdata:
+  weather_neo4jdata:

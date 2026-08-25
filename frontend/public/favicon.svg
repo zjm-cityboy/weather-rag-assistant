@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- 品牌 favicon：太阳 + 云（与界面 ⛅ logo 一致的天蓝品牌） -->
+  <circle cx="40" cy="24" r="12" fill="#fbbf24"/>
+  <g stroke="#fbbf24" stroke-width="3.5" stroke-linecap="round">
+    <line x1="40" y1="4" x2="40" y2="9"/>
+    <line x1="56" y1="10" x2="52.5" y2="13.5"/>
+    <line x1="62" y1="24" x2="57" y2="24"/>
+    <line x1="56" y1="38" x2="52.5" y2="34.5"/>
+  </g>
+  <path d="M18 46a10 10 0 0 1 1.6-19.9A14 14 0 0 1 46 30a8 8 0 0 1 0 16z" fill="#0284c7"/>
+  <path d="M18 46a10 10 0 0 1 1.6-19.9A14 14 0 0 1 46 30a8 8 0 0 1 0 16z" fill="none" stroke="#075985" stroke-width="2"/>
+</svg>

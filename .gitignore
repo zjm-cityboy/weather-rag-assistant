@@ -1,0 +1,32 @@
+# 密钥与凭据（永不入库）
+backend/.env
+backend/keys/
+*.pem
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.ruff_cache/
+.pytest_cache/
+
+# Node
+node_modules/
+frontend/dist/
+
+# 数据与大文件（语料本地资产：教材 PDF/清洗产物/爬取快照，重建命令见 README）
+datas/
+backups/
+
+# 评估生成缓存（可由脚本重生成；评测集 jsonl 与结果 json 提交）
+evals/ragas_answers.json
+
+# 工具工作目录（Mimosa 扫描缓存，可再生）
+.mimosa/
+
+# 设计工具产物
+.superdesign/
+
+# 系统与编辑器
+.DS_Store
+Thumbs.db
