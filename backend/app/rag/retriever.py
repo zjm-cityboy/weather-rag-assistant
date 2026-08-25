@@ -31,26 +31,21 @@ VECTOR_SQL = """
     LIMIT %(top_k)s
 """
 
-# 全文检索（AND 语义）：plainto_tsquery 把分词串按 & 连接（对特殊字符免疫，天然防语法注入），
-# ts_rank_cd 按词频+词距打分（tf-idf 家族，与 BM25 的关系见 docs/hybrid-search.md）
+# 全文检索（BM25）：pg_search 扩展的 @@@ 操作符 + paradedb.score() 打分。
+# 真 BM25 公式（Tantivy 实现，带 k1/b 饱和参数），jieba 分词在索引内完成——
+# 演进记录：v1 用 PG 原生 ts_rank_cd（tf-idf 家族，无 k1/b），v2 升级 pg_search
 LEXICAL_SQL = """
     SELECT id, content, source, page, url,
-           ts_rank_cd(tsv, plainto_tsquery('simple', %(tokens)s)) AS score
+           paradedb.score(id) AS score
     FROM knowledge_chunks
-    WHERE tsv @@ plainto_tsquery('simple', %(tokens)s)
+    WHERE content @@@ %(or_query)s
     ORDER BY score DESC
     LIMIT %(top_k)s
 """
-
-# 全文检索降级（OR 语义）：AND 全灭时放宽为任一词命中，ts_rank_cd 仍偏向命中词多的文档
-LEXICAL_OR_SQL = """
-    SELECT id, content, source, page, url,
-           ts_rank_cd(tsv, to_tsquery('simple', %(tokens)s)) AS score
-    FROM knowledge_chunks
-    WHERE tsv @@ to_tsquery('simple', %(tokens)s)
-    ORDER BY score DESC
-    LIMIT %(top_k)s
-"""
+# 说明：查询词显式 OR 连接。pg_search 多词默认 AND 语义，而用户问题必带
+# 疑问词（"台风预警信号分几级"），AND 必然全灭——与 v1 的 tsquery 同款问题。
+# BM25 的 OR 打分天然"命中多且稀有的词权重高"，不再需要 AND→OR 两级降级，
+# 一条 SQL 完成（比 v1 少一次往返）。
 
 # 全文检索分词清洗：合法 lexeme（汉字/字母/数字/下划线）+ 常见疑问词虚词过滤
 _TOKEN_RE = re.compile(r"^[\w\u4e00-\u9fff]+$")
@@ -123,20 +118,20 @@ def search(question: str, top_k: int = TOP_K) -> list[dict]:
 
 
 def search_lexical(zh_query: str, top_k: int = TOP_K) -> list[dict]:
-    """全文单路：jieba 分词 → 停用词过滤 → PG 全文匹配 top-k。
+    """全文单路（BM25）：jieba 分词 → 停用词过滤 → OR 查询取 top-k。
 
-    两级匹配：先 AND（所有词都要命中，精准）；空结果降级 OR（任一词命中，
-    ts_rank_cd 排序仍偏向命中多的）。不降级的话，"台风预警信号分几级"
-    里的"几级"会让 AND 全灭——用户问题必然带疑问词，这是必经路径。
-    分词必须与入库侧一致（都是 jieba 精确模式），否则词面不同无法命中。
+    停用词过滤仍保留：BM25 的 IDF 会自动压低常见词权重，但"几级""多少"
+    这类疑问词在语料里是稀有词（IDF 反而高），不滤会稀释核心词的权重。
+    分词在应用侧做（查询串拼接），索引侧 pg_search 用内置 jieba 分词——
+    两侧词面一致性由同款 jieba 保证。
     """
     tokens = _tokenize(zh_query)
     if not tokens:
         return []
 
-    rows = _fetch(LEXICAL_SQL, {"tokens": " ".join(tokens), "top_k": top_k})
-    if not rows:                     # AND 全灭 → OR 降级
-        rows = _fetch(LEXICAL_OR_SQL, {"tokens": " | ".join(tokens), "top_k": top_k})
+    # 词用 OR 连接（见 LEXICAL_SQL 上方说明）；%(or_query)s 参数绑定防注入
+    rows = _fetch(LEXICAL_SQL,
+                  {"or_query": " OR ".join(tokens), "top_k": top_k})
     return [_as_chunk(r, "lex_score") for r in rows]
 
 

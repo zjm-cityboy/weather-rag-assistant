@@ -226,3 +226,25 @@
 **结论**：检索管线定型为"两路召回（BGE-M3 向量 + PG 全文）→ RRF → rerank"；评估方法论沉淀"指标健康检查 + 方差意识"两条（避免把评估噪声当改进）。
 
 
+
+## 实验 10：BM25（pg_search）vs ts_rank_cd 词法路对照（2026-08-25）
+
+**背景**：词法路从 PG 原生全文检索（ts_rank_cd，tf-idf 家族）升级为 pg_search 扩展的真 BM25（Tantivy 实现，k1/b 饱和参数，jieba 内置分词），对齐"向量 + BM25 + RRF + Reranker"行业标准配方。db 镜像 pgvector/pgvector:pg18 → paradedb/paradedb（PG 18.6 + pgvector 0.8.4 + pg_search 0.25.4 三合一，同数据卷无缝切换，切换前 pg_dump 备份）。
+
+**设计**：与实验 5 同款（预设关键词 hit@5/hit@1），同 5 题分别跑两版词法路单路 + 完整端到端（向量+词法 → RRF → Rerank），同题同分母。脚本：`exp_bm25_vs_tsrank.py`。
+
+**结果**：
+
+| 指标 | ts_rank_cd | BM25 | 结论 |
+|---|---|---|---|
+| 词法单路 hit@5 | 20/25 | 18/25 | BM25 -2（第 2 题排序差异） |
+| 词法单路 hit@1 | 4/5 | 4/5 | 持平 |
+| 单路延迟 | 2ms | 2ms | 持平 |
+| **端到端 hit@5** | **20/25** | **20/25** | **持平** |
+| **端到端 hit@1** | **5/5** | **5/5** | **持平** |
+
+**结论**：BM25 词法单路 hit@5 略低 2 块，但端到端（RRF 融合 + Rerank 精排后）完全持平——印证了本架构的设计预期：RRF 只用排名不用原始分数、最终排序由 Reranker 决定，词法路的打分精度差异被两道后置环节抹平。替换零回归，检索栈升级为行业标准配方。
+
+**收益**（非指标类）：①简历/架构表述从"PG 全文检索（tf-idf 家族）"变为"BM25"，无需再附"非严格 BM25"的诚实声明；②jieba 分词下沉到索引内（入库侧不再需要 jieba 预分词与 tsv 生成列，查询侧少一次 AND→OR 降级往返）；③pg_search 走 Tantivy 倒排索引，为未来语料规模增长预留词法检索扩展空间。
+
+**踩坑**：①pg_search 0.25 要求 `shared_preload_libraries`，老数据卷的 postgresql.conf 没有该项（镜像只在新库自动写入），compose 需显式 `command: postgres -c shared_preload_libraries=pg_search`；②`text_fields` 索引配置 0.25 起要求对象格式（`{"field": {"tokenizer": ...}}`），数组格式报"invalid type: sequence"；③`@@@` 多词默认 AND 语义——用户问题带疑问词时必然全灭，需显式 OR 连接（与 v1 tsquery 同款问题的 BM25 版解法）。

@@ -12,8 +12,11 @@
 
 services:
   db:
-    image: pgvector/pgvector:pg18            # PG18：挂父目录，数据在卷内 18/docker 子目录
+    image: paradedb/paradedb:latest      # ParadeDB：官方 PG18.6 + pgvector 0.8.4 + pg_search(BM25) 三合一
     container_name: weather-pg
+    # pg_search 0.25 要求预加载；老数据卷的 postgresql.conf 没有这项
+    # （ParadeDB 镜像只在新初始化的库自动写入），显式传参兜底
+    command: postgres -c shared_preload_libraries=pg_search
     environment:
       POSTGRES_PASSWORD: ${PG_PASSWORD:-weather_dev_2026}   # 本地演示默认值，生产用 .env 覆盖
       POSTGRES_DB: weather

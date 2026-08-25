@@ -52,11 +52,13 @@ def main() -> None:
     totals = {k: [0, 0] for k in "ABDE"}     # 配置 → [hit@5 累计, hit@1 累计]
 
     for zh, en, keywords, qtype in QUESTIONS:
+        # 适配实验9后的两路终态：search_hybrid(zh, top_k)（英文路已下线）
+        # B 全文列自 v2 起为 BM25（pg_search），D 融合列同步去掉英文单路
         configs = {
             "A": search(zh, 5),
             "B": search_lexical(zh, 5),
-            "D": rrf_fuse([search(zh, 20), search(en, 20), search_lexical(zh, 20)], 5),
-            "E": search_hybrid(zh, en, 5),
+            "D": rrf_fuse([search(zh, 20), search_lexical(zh, 20)], 5),
+            "E": search_hybrid(zh, 5),
         }
         cells = []
         for name, hits in configs.items():
@@ -68,7 +70,7 @@ def main() -> None:
 
     print(f"\n{'合计 hit@5/hit@1':<26}" + "".join(f"{totals[k][0]}/{totals[k][1]:>2}" .rjust(8) for k in "ABDE"))
     t0 = time.time()
-    search_hybrid(*QUESTIONS[0][:2], 5)
+    search_hybrid(QUESTIONS[0][0], 5)
     print(f"\n单次混合检索总耗时（含嵌入×3 + 全文 + rerank）：{time.time()-t0:.2f}s")
 
 

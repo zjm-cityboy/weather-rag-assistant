@@ -24,9 +24,9 @@
 前端   Vue 3 + Vite（原生 JS）｜Element Plus｜ECharts｜markdown-it｜EventSource
 后端   FastAPI + Uvicorn｜SSE（StreamingResponse）｜Pydantic
 编排   LangChain + LangGraph（意图路由状态图）
-检索   pgvector 向量检索 + PG 全文检索 → RRF 融合 → Qwen3-Reranker 精排
+检索   pgvector 向量检索 + BM25 全文检索（pg_search，jieba 分词）→ RRF 融合 → Qwen3-Reranker 精排
        Neo4j 知识图谱（灾害关系链问答，LLM 三元组抽取构建，意图路由第四通路）
-存储   PostgreSQL + pgvector（知识块 + 会话 + 业务数据一库）
+存储   PostgreSQL + pgvector + pg_search（ParadeDB 镜像三合一：知识块 + 会话 + 业务数据一库）
        Neo4j 5.x 社区版（灾害预警知识图谱，890 节点/1018 关系）
 模型   硅基流动 API：Chat LLM + BAAI/bge-m3（嵌入，实验 8 换代）+ Qwen3-Reranker
        （后期可切 Ollama 本地模型演示私有化部署）
@@ -51,7 +51,7 @@
 | 1 | FastAPI 后端：/ask 接口 + SSE + 会话记忆 + 引用溯源 + 查询改写 | 可调用的 API | ✅ 完成（多轮对话实测通过，单轮 3~4s） |
 | 2 | Vue 前端：聊天界面 + SSE 流式渲染（打字机）+ 引用来源卡片 | 网页版可用 | ✅ 完成（fetch+ReadableStream 解析 SSE，Vite 代理联调） |
 | 3 | LangGraph 意图路由 + 和风天气工具调用 | 天气播报功能 | ✅ 完成（三通路状态图；JWT 认证接入真实 API，实测上海 26.7°C 播报） |
-| 4 | 混合检索：PG 全文检索 + 三路 RRF + Reranker 精排 | 检索质量升级 | ✅ 完成（消融实验 hit@1 3/5→5/5，见 docs/hybrid-search.md） |
+| 4 | 混合检索：全文检索 + 三路 RRF + Reranker 精排 | 检索质量升级 | ✅ 完成（消融实验 hit@1 3/5→5/5，见 docs/hybrid-search.md；实验 10 词法路升级 pg_search 真 BM25，端到端零回归） |
 | 5 | Neo4j 灾害预警知识图谱（LLM 三元组抽取 + 多跳查询 + 意图路由第四通路） | 关系链问答 | ✅ 完成（890 节点/1018 关系；关系类问题检索快 ~35 倍，见 docs/knowledge-graph.md） |
 | 6 | RAGAS 评估 + 注册登录 + Docker Compose 部署 | 工程闭环 + 效果报告 | ✅ 完成（四指标评估忠实度 0.877；bcrypt+JWT 登录；compose 一键部署。Langfuse 未引入：单人项目评估+日志已覆盖，自托管观测栈超出必要复杂度） |
 
