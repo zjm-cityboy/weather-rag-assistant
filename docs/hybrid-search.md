@@ -1,6 +1,6 @@
 # 第 4 期 · 混合检索原理笔记（hybrid-search.md）
 
-> 定位：面试武器库。每一节都按"原理 → 本项目怎么落地 → 面试怎么答"组织。
+> 定位：混合检索原理与实现笔记，按"原理 → 本项目落地 → 常见问答"组织。
 > 配套实验数据见 `docs/experiments.md` 实验 5；代码见 `backend/app/rag/retriever.py`。
 
 ---
@@ -45,7 +45,7 @@ BM25（Okapi BM25，1994）是目前最主流的词法相关性评分函数（El
 score(q, d) = Σ_i  IDF(q_i) · [ tf(q_i,d) · (k1+1) ] / [ tf(q_i,d) + k1·(1 − b + b·|d|/avgdl) ]
 ```
 
-逐项拆解（面试要能指着公式讲）：
+逐项拆解（对照公式理解）：
 
 | 组件 | 作用 | 直觉 |
 |------|------|------|
@@ -62,9 +62,9 @@ PostgreSQL 原生全文检索的排序函数是 `ts_rank_cd`（cd = cover densit
 - 计算词频，并额外考虑**查询词在文档中出现的紧密程度**（词挨得越近分越高）
 - **没有** BM25 的 k1 饱和曲线和 b 长度归一（PG 22.x 及之前都没有内置 BM25）
 
-本项目选型理由：pgvector 已在库，PG 全文检索**零新增组件**即可获得词法分支；对 2675 条小语料，ts_rank_cd 与 BM25 的排序差异远小于"有没有词法分支"的差异。真需要严格 BM25 的方案是 ParadeDB 的 `pg_search` 扩展或 Elasticsearch——面试时能说清这个差异与取舍，比背"我用了 BM25"更加分。
+本项目选型理由：pgvector 已在库，PG 全文检索**零新增组件**即可获得词法分支；对 2675 条小语料，ts_rank_cd 与 BM25 的排序差异远小于"有没有词法分支"的差异。真需要严格 BM25 的方案是 ParadeDB 的 `pg_search` 扩展或 Elasticsearch——能说清这个差异与取舍，比笼统写"用了 BM25"更准确。
 
-> **简历/面试措辞**：写"PostgreSQL 全文检索（tsvector/GIN 索引）与向量检索 RRF 混合，cross-encoder 精排"，不写"BM25"冒充。
+> **技术表述规范**：写"PostgreSQL 全文检索（tsvector/GIN 索引）与向量检索 RRF 混合，cross-encoder 精排"，不写"BM25"冒充。
 
 ### 2.4 中文分词：为什么必须外置 jieba
 
@@ -129,7 +129,7 @@ def rrf_fuse(rank_lists, top_k):
 
 ---
 
-## 4. Reranker 精排：cross-encoder vs bi-encoder（面试高频！）
+## 4. Reranker 精排：cross-encoder vs bi-encoder（高频问题）
 
 ### 4.1 结构差异
 
@@ -229,7 +229,7 @@ build_context（[1]~[5] 编号资料）→ LLM 流式生成 → 引用溯源
 
 ---
 
-## 7. 面试自问自答
+## 7. 常见问题（Q&A）
 
 **Q1：为什么不用 BM25 而用 PG 的 ts_rank_cd？**
 A：严格说是选了 PG 原生全文检索而不是严格 BM25。ts_rank_cd 属于 tf-idf 家族（带覆盖密度），缺 BM25 的 k1 饱和与 b 长度归一；对本项目 2675 条语料，这个排序差异的影响远小于"有无词法分支"，且零新增组件（pgvector 已在库）。要严格 BM25 会选 ParadeDB pg_search 或 Elasticsearch。关键是能讲出 BM25 公式两项修正的含义（见 2.2）。

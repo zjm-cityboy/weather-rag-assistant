@@ -39,4 +39,4 @@
 - 网页科普 → 直接抓 HTML 文字（无需 OCR）
 - PDF 文字页 → PyMuPDF
 - PDF 扫描页/表格页 → **DeepSeek-OCR（免费主力）**，PaddleOCR-VL 作对照实验组
-- 两个免费 OCR 的对比本身可做成一次对照实验（面试素材）
+- 两个免费 OCR 的对比本身可做成一次对照实验
