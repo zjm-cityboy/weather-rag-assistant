@@ -5,6 +5,8 @@
 运行：cd backend && python -m pytest tests/ -v
 """
 
+# ruff: noqa: I001 —— import 按测试分节就近放置（分节注释是阅读结构的一部分）
+
 import sys
 import time
 from pathlib import Path

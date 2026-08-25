@@ -11,12 +11,13 @@ import os
 
 import psycopg2
 
-# 默认本机直连；Docker Compose 里通过环境变量覆盖为服务名（PGHOST=db）
+# 连接参数支持 env 覆盖（Docker Compose 里 host=db）；库名固定常量——
+# CREATE DATABASE 语法不支持参数绑定，消除动态源即消除注入面（compose 的建库由 POSTGRES_DB 完成）
 PG_HOST = os.getenv("PGHOST", "localhost")
 PG_PORT = int(os.getenv("PGPORT", "5432"))
 PG_USER = os.getenv("PGUSER", "postgres")
 PG_PASSWORD = os.getenv("PGPASSWORD", "weather_dev_2026")
-DB_NAME = os.getenv("PGDATABASE", "weather")
+DB_NAME = "weather"
 
 # ============================================================
 # 1. 建库（CREATE DATABASE 不支持 IF NOT EXISTS，先查系统表）
@@ -30,7 +31,7 @@ def ensure_database() -> None:
     if cur.fetchone():
         print(f"[1] 数据库 {DB_NAME} 已存在，跳过建库")
     else:
-        cur.execute(f"CREATE DATABASE {DB_NAME};")
+        cur.execute("CREATE DATABASE weather;")   # 库名为模块常量，见文件头说明
         print(f"[1] 已创建数据库 {DB_NAME}")
     conn.close()
 

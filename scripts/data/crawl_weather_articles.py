@@ -13,6 +13,7 @@ import json
 import re
 import time
 from pathlib import Path
+from urllib.parse import urlparse
 
 import requests
 from bs4 import BeautifulSoup
@@ -40,11 +41,32 @@ ARTICLE_PAT = re.compile(r"https?://(?:[\w-]+\.)*weather\.com\.cn/\w+/\d{4}/\d{2
 # ============================================================
 # 基础抓取单元
 # ============================================================
+ALLOWED_HOSTS = ("weather.com.cn", "typhoon.weather.com.cn")   # SSRF 防护：host 白名单
+
+
+def _safe_url(url: str) -> str | None:
+    """SSRF 校验：仅 http/https 且 host 在白名单域内；不合规返回 None。"""
+    parsed = urlparse(url)
+    if parsed.scheme not in ("http", "https") or not parsed.hostname:
+        return None
+    host = parsed.hostname.lower()
+    if any(host == h or host.endswith("." + h) for h in ALLOWED_HOSTS):
+        return url
+    return None
+
+
 def fetch(url: str) -> requests.Response | None:
-    """带超时与 1 次重试的 GET；失败返回 None，单篇失败不中断整批。"""
+    """带超时与 1 次重试的 GET；失败返回 None，单篇失败不中断整批。
+
+    每次请求前强制过 _safe_url 白名单（防 SSRF），列表外 host 直接跳过。
+    """
+    safe_url = _safe_url(url)
+    if not safe_url:
+        print(f"  [skip] URL 未通过白名单校验：{url}")
+        return None
     for attempt in range(2):
         try:
-            r = requests.get(url, headers=HEADERS, timeout=TIMEOUT)
+            r = requests.get(safe_url, headers=HEADERS, timeout=TIMEOUT)
             r.encoding = r.apparent_encoding or "utf-8"   # 按页面内容探测编码，防乱码
             if r.status_code == 200:
                 return r
