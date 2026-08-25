@@ -75,9 +75,9 @@ def answer_weather_node(state: State) -> dict:
 
 
 def retrieve_node(state: State) -> dict:
-    """混合检索：查询预处理（指代消解+英译）→ 三路召回 RRF 融合 → rerank 精排。"""
-    zh_q, en_q = chain.rewrite_query(state["question"], state["history"])
-    return {"chunks": retriever.search_hybrid(zh_q, en_q)}
+    """混合检索：查询预处理（指代消解）→ 两路召回（向量+全文）RRF 融合 → rerank 精排。"""
+    zh_q = chain.rewrite_query(state["question"], state["history"])
+    return {"chunks": retriever.search_hybrid(zh_q)}
 
 
 def query_graph_node(state: State) -> dict:

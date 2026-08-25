@@ -1,15 +1,16 @@
 """
-检索模块（第 4 期：混合检索，检索与精排同模块）
+检索模块（第 4 期混合检索；实验 8 后简化为两路，检索与精排同模块）
 
-三路召回，单层 RRF 融合，cross-encoder 精排：
-    ① 向量·中文  embedding <=> 余弦距离（HNSW 索引）——语义召回
-    ② 向量·英文  同上，英文查询——跨语言补位（英文教材语料）
-    ③ 全文·中文  PG tsvector @@ 匹配 + ts_rank_cd 排序（GIN 索引）——关键词精确召回
+两路召回，单层 RRF 融合，cross-encoder 精排：
+    ① 向量·中文  embedding <=> 余弦距离（HNSW 索引）——语义召回；
+       BGE-M3 为多语言模型，中文 query 可直接命中英文块（实验 8：Hit@10 0→6）
+    ② 全文·中文  PG tsvector @@ 匹配 + ts_rank_cd 排序（GIN 索引）——关键词精确召回
                                         ↓
         RRF 融合（只看排名，不看分数量纲） → Reranker 精排取 top-k
 
-为什么需要三路：向量检索对"术语精确匹配"弱（嵌入把词压成一个点，专有名词容易糊），
+为什么需要两路：向量检索对"术语精确匹配"弱（嵌入把词压成一个点，专有名词容易糊），
 全文检索对"同义改写"弱（字面不同就查不到）；两者的失败模式恰好互补。
+（英文查询路已下线：对照实验命中持平 13/20 vs 14/20 而延迟省 43%，见 experiments.md）
 """
 
 import re
@@ -203,21 +204,23 @@ def rerank_chunks(query: str, chunks: list[dict], top_n: int) -> list[dict] | No
 
 
 # ============================================================
-# 混合检索主入口（三路召回 → RRF → cross-encoder 精排）
+# 混合检索主入口（两路召回 → RRF → cross-encoder 精排）
 # ============================================================
 HYBRID_CANDIDATES = 20    # 融合后送精排的候选池大小（召回求全，精排求准）
 
 
-def search_hybrid(zh_query: str, en_query: str, top_k: int = TOP_K) -> list[dict]:
-    """混合检索：三路召回（向量中/英 + 全文中）→ RRF 融合 → Reranker 精排。
+def search_hybrid(zh_query: str, top_k: int = TOP_K) -> list[dict]:
+    """混合检索：两路召回（向量中文 + 全文中文）→ RRF 融合 → Reranker 精排。
 
-    精排用原始中文问题（冒烟测试实测跨语言 relevance_score 0.989，英文 chunk
-    可被中文问题正确精排）；rerank 失败降级用 RRF 顺序（增强项不阻断主链路）。
+    英文查询路已下线（实验 8/对照实验数据）：BGE-M3 换代后中文 query 单路即可
+    命中英文教材（Hit@10 0→6），开/关英文路命中持平（13/20 vs 14/20）而关路
+    检索延迟省 43%（0.78s vs 1.36s），线上另省一次 LLM 英译改写调用。
+    rerank 用中文问题直接精排（冒烟测试实测跨语 relevance_score 0.989，
+    英文 chunk 可被中文问题正确排序）；失败降级用 RRF 顺序（不阻断主链路）。
     """
     rank_lists = [
-        search(zh_query, HYBRID_CANDIDATES),          # ① 向量·中文
-        search(en_query, HYBRID_CANDIDATES),          # ② 向量·英文
-        search_lexical(zh_query, HYBRID_CANDIDATES),  # ③ 全文·中文（字面匹配强项）
+        search(zh_query, HYBRID_CANDIDATES),          # ① 向量·中文（BGE-M3 跨语直接命中英文块）
+        search_lexical(zh_query, HYBRID_CANDIDATES),  # ② 全文·中文（字面匹配强项）
     ]
     candidates = rrf_fuse(rank_lists, HYBRID_CANDIDATES)
 

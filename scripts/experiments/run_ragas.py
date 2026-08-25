@@ -52,8 +52,8 @@ def generate_answers(items: list[dict]) -> list[dict]:
     records = []
     for i, item in enumerate(items, 1):
         t0 = time.time()
-        zh_q, en_q = chain.rewrite_query(item["question"], [])          # 预处理（无历史）
-        chunks = retriever.search_hybrid(zh_q, en_q)                    # 混合检索 top-5
+        zh_q = chain.rewrite_query(item["question"], [])                # 预处理（无历史）
+        chunks = retriever.search_hybrid(zh_q)                          # 混合检索 top-5
         prompt = chain.build_prompt().invoke({
             "history": [], "context": chain.build_context(chunks), "question": item["question"]})
         answer = llm.invoke(prompt).content                              # 非流式取全文
@@ -69,10 +69,23 @@ def generate_answers(items: list[dict]) -> list[dict]:
 
 
 def run_ragas(records: list[dict]) -> dict:
-    """阶段②：ragas 四指标评估（evaluator 独立 LLM/embedding 实例）。"""
+    """阶段②：ragas 四指标评估（evaluator 独立 LLM/embedding 实例）。
+
+    reference 用中英双语要点（评测集 reference + reference_en 按问题对齐拼接）——
+    校准"英文教材块 vs 中文参考要点"的语言错位低估（实验 8 结论的落地）。
+    """
+    # 评测集的英文要点按问题对齐（answers 缓存里只有中文 reference）
+    en_by_q = {}
+    for line in EVAL_SET.read_text(encoding="utf-8").splitlines():
+        if line.strip():
+            d = json.loads(line)
+            en_by_q[d["question"]] = d.get("reference_en", "")
+
     dataset = EvaluationDataset([
-        SingleTurnSample(user_input=r["question"], retrieved_contexts=r["contexts"],
-                         response=r["answer"], reference=r["reference"])
+        SingleTurnSample(
+            user_input=r["question"], retrieved_contexts=r["contexts"],
+            response=r["answer"],
+            reference=f"{r['reference']}\nEnglish key points: {en_by_q.get(r['question'], '')}")
         for r in records
     ])
     evaluator_llm = LangchainLLMWrapper(ChatOpenAI(

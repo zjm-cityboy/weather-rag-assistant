@@ -42,17 +42,6 @@ CONTEXT_TEMPLATE = """【参考资料】
 【用户问题】
 {question}"""
 
-# 指代消解：把"其中最严重的？"这类依赖上下文的问题改写成独立问题（检索质量的关键）
-CONDENSE_PROMPT = """你是气象知识库的查询预处理器。根据对话历史处理用户的最新问题，输出两行：
-第 1 行以 "ZH:" 开头，是消解了代词指代、独立完整的中文问题；
-第 2 行以 "EN:" 开头，是该中文问题的英文翻译（气象术语准确，如台风=tropical cyclone/typhoon）。
-只输出这两行，不要任何其他内容。
-
-对话历史：
-{history}
-
-最新问题：{question}"""
-
 
 def classify_intent(question: str) -> tuple[str, str]:
     """意图分类，返回 (intent, city)。
@@ -84,18 +73,29 @@ def classify_intent(question: str) -> tuple[str, str]:
         return "knowledge", ""
 
 
-def rewrite_query(question: str, history: list) -> tuple[str, str]:
-    """查询预处理：指代消解（中文）+ 英文翻译，返回 (中文查询, 英文查询)。
+# 指代消解：把"其中最严重的？"这类依赖上下文的问题改写成独立问题（检索质量的关键）
+# 英文翻译路已下线（实验 8：BGE-M3 中文 query 直接命中英文教材，英译成纯开销）
+CONDENSE_PROMPT = """你是气象知识库的查询预处理器。根据对话历史处理用户的最新问题，
+输出一行改写后的独立完整中文问题（消解代词指代；问题本身独立则原样输出）。
+只输出这一行问题，不要任何其他内容。
 
-    两个预处理都为检索服务：
-    - 指代消解：指代句（"其中最严重的？"）嵌入语义泛化，top-k 会跑偏；
-    - 英文翻译：知识库中英文混合，Qwen3-Embedding 跨语言对齐弱（实测中文
-      "台风怎么形成"召不回英文台风章，见 experiments.md 实验 4），
-      需双语两路检索互补。无历史时中文路直接用原话，仅翻译。
+对话历史：
+{history}
+
+最新问题：{question}"""
+
+
+def rewrite_query(question: str, history: list) -> str:
+    """查询预处理：指代消解，返回独立完整的中文查询。
+
+    指代句（"其中最严重的？"）嵌入语义泛化，top-k 会跑偏，必须先消解；
+    无历史时直接用原话，不调 LLM（省一次调用）。
     """
+    if not history:
+        return question
     history_text = "\n".join(
         f"{'用户' if m.type == 'human' else '助手'}: {m.content}" for m in history
-    ) if history else "（无）"
+    )
     llm = ChatOpenAI(
         model=CHAT_MODEL,
         api_key=API_KEY,
@@ -103,21 +103,14 @@ def rewrite_query(question: str, history: list) -> tuple[str, str]:
         temperature=0.0,                               # 预处理任务要确定性
         timeout=30,
         max_retries=1,
-        max_tokens=150,                                # 两行短问题足够
+        max_tokens=100,                                # 一行短问题足够
         extra_body={"enable_thinking": False},         # 同 get_llm，关闭思考保低延迟
     )
     try:
         out = llm.invoke(CONDENSE_PROMPT.format(history=history_text, question=question)).content
-        zh = en = ""
-        for line in out.splitlines():
-            line = line.strip()
-            if line.startswith("ZH:"):
-                zh = line[3:].strip()
-            elif line.startswith("EN:"):
-                en = line[3:].strip()
-        return (zh or question), (en or question)      # 解析失败降级用原话
+        return out.strip().splitlines()[0][:100] or question   # 取首行，异常降级用原话
     except Exception:  # noqa: BLE001 —— 预处理失败不阻断问答，降级用原话
-        return question, question
+        return question
 
 
 def get_llm() -> ChatOpenAI:
