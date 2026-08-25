@@ -15,7 +15,7 @@ services:
     image: pgvector/pgvector:pg18            # PG18：挂父目录，数据在卷内 18/docker 子目录
     container_name: weather-pg
     environment:
-      POSTGRES_PASSWORD: weather_dev_2026
+      POSTGRES_PASSWORD: ${PG_PASSWORD:-weather_dev_2026}   # 本地演示默认值，生产用 .env 覆盖
       POSTGRES_DB: weather
     ports:
       - "5432:5432"
